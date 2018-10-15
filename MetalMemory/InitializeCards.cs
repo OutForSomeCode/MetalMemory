@@ -14,8 +14,10 @@ namespace MetalMemory
     class InitializeCards
     {
         private Grid Localgrid;
+        private Random RandomNumberGenerator = new Random();
         private int TotalCards;
         private int UniqueCards;
+        
 
         public InitializeCards(Grid Publicgrid, int column, int row)
         {
@@ -34,7 +36,7 @@ namespace MetalMemory
                 ImageSource source = new BitmapImage(new Uri("Images/Cards/Card" + CardNumber + ".png", UriKind.Relative));
                 Images.Add(source);
             }
-            return Images;
+            return Images.OrderBy(a => RandomNumberGenerator.Next()).ToList();
         }
 
         private void AddCardBack(int columns, int rows)
@@ -63,8 +65,6 @@ namespace MetalMemory
             Image Card = (Image)sender;
             ImageSource Face = (ImageSource)Card.Tag;
             Card.Source = Face;
-            
-            //add randomizer
         }
     }
 }
