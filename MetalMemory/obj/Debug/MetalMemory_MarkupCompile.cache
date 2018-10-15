@@ -4,15 +4,15 @@
 winexe
 C#
 .cs
-C:\Users\rolan\Desktop\MetalMemory\MetalMemory\obj\Debug\
+C:\Users\rolan\Documents\GitHub\MetalMemory\MetalMemory\obj\Debug\
 MetalMemory
 none
 false
 DEBUG;TRACE
-C:\Users\rolan\Desktop\MetalMemory\MetalMemory\App.xaml
+C:\Users\rolan\Documents\GitHub\MetalMemory\MetalMemory\App.xaml
 51476119765
 
-12-808845929
+111623315480
 131569487696
 InitializeGame.xaml;LoadGame.xaml;MainMenu.xaml;MainWindow.xaml;ScoreDisplay.xaml;
 

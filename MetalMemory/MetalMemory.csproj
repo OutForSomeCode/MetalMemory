@@ -59,7 +59,6 @@
     <Compile Include="ScoreDisplay.xaml.cs">
       <DependentUpon>ScoreDisplay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ShuffleCards.cs" />
     <Page Include="InitializeGame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
