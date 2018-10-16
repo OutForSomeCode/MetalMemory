@@ -162,13 +162,13 @@
     <Resource Include="Images\Cards\CardBack.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\start.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\BackgroundMenu.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\MMBG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\start.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

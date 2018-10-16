@@ -13,19 +13,63 @@
             <ColumnDefinition Width="43.75*"/>
             <ColumnDefinition Width="56.25*"/>
         </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="5*"/>
+                </Grid.RowDefinitions>
+                <TextBox Grid.Row="0" x:Name="PlayerName_1"/>
+                <TextBlock Grid.Row="0" IsHitTestVisible="False" Text="Player 1" FontSize="48" FontFamily="Courier New" Foreground="DarkGray" VerticalAlignment="Center" Margin="10,0,0,0">
+                    <TextBlock.Style>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Text, ElementName=PlayerName_1}" Value="">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+                <TextBox Grid.Row="1" x:Name="PlayerName_2"/>
+                <TextBlock Grid.Row="1" IsHitTestVisible="False" Text="Player 2" FontSize="48" FontFamily="Courier New" Foreground="DarkGray" VerticalAlignment="Center" Margin="10,0,0,0">
+                    <TextBlock.Style>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Text, ElementName=PlayerName_2}" Value="">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+                <RadioButton Grid.Column="0" GroupName="RadioCards" Name="Cards16" IsChecked="True" HorizontalAlignment="Center" VerticalAlignment="Center"></RadioButton>
+                <RadioButton Grid.Column="1" GroupName="RadioCards" Name="Cards36" HorizontalAlignment="Center" VerticalAlignment="Center"></RadioButton>
+                <RadioButton Grid.Column="2" GroupName="RadioCards" Name="Cards64" HorizontalAlignment="Center" VerticalAlignment="Center"></RadioButton>
+            </Grid>
+            <Button Click="NewGame_Click" Grid.Row="2" FontSize="48" FontFamily="Courier New">New Game</Button>
+            <Button Click="LoadGame_Click" Grid.Row="3" FontSize="48" FontFamily="Courier New">Load</Button>
+        </Grid>
         <Grid Grid.Column="1" x:Name="MemoryGrid">
             
         </Grid>
         <Grid Panel.ZIndex="1000" Grid.Column="0">
             <Frame x:Name="UserInterface"></Frame>
         </Grid>
-        <StackPanel Width="200" Height="75" Margin="0,-135,0,0" Background="#FFDDDDDD">
-            <Label>Amount of cards</Label>
-            <RadioButton GroupName="RadioCards" Name="Cards16" IsChecked="True">16 Cards</RadioButton>
-            <RadioButton GroupName="RadioCards" Name="Cards36">36 Cards</RadioButton>
-            <RadioButton GroupName="RadioCards" Name="Cards64">64 Cards</RadioButton>
-        </StackPanel>
-        <Button Click="NewGame_Click" Width="200" Height="50">New Game</Button>
-        <Button Click="LoadGame_Click" Width="200" Height="50" Margin="0,0,0,-110">Load</Button>
     </Grid>
 </Page>

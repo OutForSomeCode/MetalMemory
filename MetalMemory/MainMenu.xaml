@@ -13,9 +13,9 @@
             <ColumnDefinition Width="43.75*"/>
             <ColumnDefinition Width="56.25*"/>
         </Grid.ColumnDefinitions>
+        <Image Source="Images/start.png" Grid.Column="1" MouseDown="Start_Click"></Image>
         <Grid x:Name="ScoreBoardGrid">
 
         </Grid>
-        <Image Source="Images/start.png" Grid.Column="1" MouseDown="Start_Click" Width="400" Height="400" Margin="0,-200,150,0"></Image>
     </Grid>
 </Page>
