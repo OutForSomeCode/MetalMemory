@@ -58,12 +58,12 @@
                     <ColumnDefinition Width="3*"/>
                     <ColumnDefinition Width="3*"/>
                 </Grid.ColumnDefinitions>
-                <RadioButton Grid.Column="0" GroupName="RadioCards" Name="Cards16" IsChecked="True" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White">16</RadioButton>
-                <RadioButton Grid.Column="1" GroupName="RadioCards" Name="Cards36" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White">36</RadioButton>
-                <RadioButton Grid.Column="2" GroupName="RadioCards" Name="Cards64" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White">64</RadioButton>
+                <RadioButton Grid.Column="0" GroupName="RadioCards" Name="Cards16" IsChecked="True" Cursor="Hand" Width="187"></RadioButton>
+                <RadioButton Grid.Column="1" GroupName="RadioCards" Name="Cards36" Cursor="Hand">36</RadioButton>
+                <RadioButton Grid.Column="2" GroupName="RadioCards" Name="Cards64" Cursor="Hand">64</RadioButton>
             </Grid>
-            <Button Click="NewGame_Click" Grid.Row="2" FontSize="48" FontFamily="Courier New">New Game</Button>
-            <Button Click="LoadGame_Click" Grid.Row="3" FontSize="48" FontFamily="Courier New">Load</Button>
+            <Button Click="NewGame_Click" Grid.Row="2" FontSize="48" FontFamily="Courier New" Cursor="Hand">New Game</Button>
+            <Button Click="LoadGame_Click" Grid.Row="3" FontSize="48" FontFamily="Courier New" Cursor="Hand">Load</Button>
         </Grid>
         <Grid Grid.Column="1" x:Name="MemoryGrid">
             
