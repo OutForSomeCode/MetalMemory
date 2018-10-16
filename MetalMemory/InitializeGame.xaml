@@ -25,7 +25,7 @@
                     <RowDefinition Height="5*"/>
                     <RowDefinition Height="5*"/>
                 </Grid.RowDefinitions>
-                <TextBox Grid.Row="0" x:Name="PlayerName_1"/>
+                <TextBox Grid.Row="0" x:Name="PlayerName_1" FontFamily="Courier New" FontSize="48" VerticalContentAlignment="Center"/>
                 <TextBlock Grid.Row="0" IsHitTestVisible="False" Text="Player 1" FontSize="48" FontFamily="Courier New" Foreground="DarkGray" VerticalAlignment="Center" Margin="10,0,0,0">
                     <TextBlock.Style>
                         <Style TargetType="{x:Type TextBlock}">
@@ -38,7 +38,7 @@
                         </Style>
                     </TextBlock.Style>
                 </TextBlock>
-                <TextBox Grid.Row="1" x:Name="PlayerName_2"/>
+                <TextBox Grid.Row="1" x:Name="PlayerName_2" FontFamily="Courier New" FontSize="48" VerticalContentAlignment="Center"/>
                 <TextBlock Grid.Row="1" IsHitTestVisible="False" Text="Player 2" FontSize="48" FontFamily="Courier New" Foreground="DarkGray" VerticalAlignment="Center" Margin="10,0,0,0">
                     <TextBlock.Style>
                         <Style TargetType="{x:Type TextBlock}">
