@@ -24,7 +24,7 @@ namespace MetalMemory
             Localgrid = Publicgrid;
             TotalCards = column * row;
             UniqueCards = TotalCards / 2;
-            AddCardBack(column, row);
+            AddCardToGrid(column, row);
         }
 
         private List<ImageSource> GetImageList()
@@ -36,10 +36,10 @@ namespace MetalMemory
                 ImageSource source = new BitmapImage(new Uri("Images/Cards/Card" + CardNumber + ".png", UriKind.Relative));
                 Images.Add(source);
             }
-            return Images.OrderBy(a => RandomNumberGenerator.Next()).ToList();
+            return Images.OrderBy(a => RandomNumberGenerator.Next()).ToList(); //returns a list off shuffled images
         }
 
-        private void AddCardBack(int columns, int rows)
+        private void AddCardToGrid(int columns, int rows)
         {
             List<ImageSource> CardFaces = GetImageList();
             for (int i = 0; i < columns; i++)
