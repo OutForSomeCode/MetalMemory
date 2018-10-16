@@ -8,6 +8,29 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/start.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/cards/card10.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/cards/card11.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/cards/card12.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/cards/card13.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/cards/card14.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/cards/card15.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/cards/card16.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/cards/card17.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/cards/card18.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/cards/card19.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/cards/card20.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/cards/card21.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/cards/card22.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/cards/card23.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/cards/card24.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/cards/card25.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/cards/card26.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/cards/card27.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/cards/card28.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/cards/card29.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/cards/card30.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/cards/card31.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/cards/card32.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/cards/card9.png")]
 
 
