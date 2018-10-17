@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Timers;
+using System.Windows.Threading;
 
 namespace MetalMemory
 {
@@ -31,18 +31,17 @@ namespace MetalMemory
 
         private void Game_Loaded()
         {
-            Timer CountDown = new Timer(1000);                   
-            CountDown.Elapsed += Timer_Elapsed;
-            CountDown.AutoReset = true;
+            DispatcherTimer CountDown = new DispatcherTimer();
+            CountDown.Interval = TimeSpan.FromSeconds(1);
+            CountDown.Tick += Timer_Elapsed;
             CountDown.Start();
         }
 
-        private void Timer_Elapsed(object sender, ElapsedEventArgs e)
+        private void Timer_Elapsed(object sender, EventArgs e)
         {
             TimeRemaining--;
-            //update timer text goes here
+            CountDownTimer.Text = "Remaining time: " + TimeRemaining.ToString();
 
-            
             if (TimeRemaining == 0)
             {
                 //Switch player code here
