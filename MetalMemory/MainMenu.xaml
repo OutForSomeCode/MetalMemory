@@ -24,6 +24,7 @@
                 <RowDefinition Height="5*"/>
                 <RowDefinition Height="4*"/>
             </Grid.RowDefinitions>
+            <TextBlock Grid.Column="1" Grid.Row="1" FontSize="48" FontFamily="Courier New" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Panel.ZIndex="10">Start</TextBlock>
             <Image Source="Images/start.png" Grid.Column="1" Grid.Row="1" MouseDown="Start_Click" Cursor="Hand" RenderTransformOrigin="0.5,0.5">
                 <Image.Triggers>
                     <EventTrigger RoutedEvent="FrameworkElement.Loaded">
