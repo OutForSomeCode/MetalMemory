@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Windows.Threading;
 using System.Timers;
 
 namespace MetalMemory
@@ -23,10 +22,10 @@ namespace MetalMemory
     public partial class ScoreDisplay : Page
     {
         private int TimeRemaining = 30;
-
         public ScoreDisplay()
         {
             InitializeComponent();
+            Game_Loaded();
         }
 
         private void Game_Loaded()
@@ -40,18 +39,13 @@ namespace MetalMemory
         private void Timer_Elapsed(object sender, EventArgs e)
         {
             TimeRemaining--;
-            //CountDownTimer.Text = "Remaining time: " + TimeRemaining.ToString();
+            Dispatcher.Invoke(new Action(() => CountDownTimer.Text = string.Format("Remaining time: {0}:{1}", TimeRemaining / 60, TimeRemaining % 60)));            
 
             if (TimeRemaining == 0)
             {
                 //Switch player code here
                 TimeRemaining = 30;
             }
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            CountDownTimer.Text = "Remaining time: " + TimeRemaining.ToString();             
         }
     }
 }
