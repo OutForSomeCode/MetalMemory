@@ -46,7 +46,6 @@ C:\Users\rolan\Desktop\MetalMemory\MetalMemory\obj\Debug\MetalMemory.pdb
 C:\Users\rolan\Documents\GitHub\MetalMemory\MetalMemory\bin\Debug\MetalMemory.exe.config
 C:\Users\rolan\Documents\GitHub\MetalMemory\MetalMemory\bin\Debug\MetalMemory.exe
 C:\Users\rolan\Documents\GitHub\MetalMemory\MetalMemory\bin\Debug\MetalMemory.pdb
-C:\Users\rolan\Documents\GitHub\MetalMemory\MetalMemory\obj\Debug\MetalMemory.csprojAssemblyReference.cache
 C:\Users\rolan\Documents\GitHub\MetalMemory\MetalMemory\obj\Debug\InitializeGame.g.cs
 C:\Users\rolan\Documents\GitHub\MetalMemory\MetalMemory\obj\Debug\LoadGame.g.cs
 C:\Users\rolan\Documents\GitHub\MetalMemory\MetalMemory\obj\Debug\MainMenu.g.cs
@@ -67,3 +66,4 @@ C:\Users\rolan\Documents\GitHub\MetalMemory\MetalMemory\obj\Debug\MetalMemory.cs
 C:\Users\rolan\Documents\GitHub\MetalMemory\MetalMemory\obj\Debug\MetalMemory.exe
 C:\Users\rolan\Documents\GitHub\MetalMemory\MetalMemory\obj\Debug\MetalMemory.pdb
 C:\Users\rolan\Documents\GitHub\MetalMemory\MetalMemory\obj\Debug\App.baml
+C:\Users\rolan\Documents\GitHub\MetalMemory\MetalMemory\obj\Debug\MetalMemory.csprojAssemblyReference.cache

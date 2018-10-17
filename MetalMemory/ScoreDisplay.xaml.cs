@@ -21,21 +21,38 @@ namespace MetalMemory
     /// </summary>
     public partial class ScoreDisplay : Page
     {
+        private int TimeRemaining = 30;
+
         public ScoreDisplay()
         {
             InitializeComponent();
+            Game_Loaded();
         }
 
-        private string CountDownTimer()
+        private void Game_Loaded()
         {
-            int SecondsRemaining = 30;
-            Timer Timer = new Timer(1000);
-            Timer.Start();
+            Timer CountDown = new Timer(1000);                   
+            CountDown.Elapsed += Timer_Elapsed;
+            CountDown.AutoReset = true;
+            CountDown.Start();
+        }
 
-            while (SecondsRemaining != 0)
-                SecondsRemaining--;
+        private void Timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            TimeRemaining--;
+            //update timer text goes here
 
-            return Timer.ToString(); 
-        } 
+            
+            if (TimeRemaining == 0)
+            {
+                //Switch player code here
+                TimeRemaining = 30;
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            CountDownTimer.Text = "Remaining time: " + TimeRemaining.ToString();             
+        }
     }
 }

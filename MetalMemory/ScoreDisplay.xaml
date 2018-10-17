@@ -9,7 +9,7 @@
       Title="ScoreDisplay">
 
     <Grid Background="White">
-        <Grid>
+        <Grid ShowGridLines="True">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="6*"/>
@@ -22,9 +22,9 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 <Button Grid.Column="0" Command="{x:Static NavigationCommands.BrowseBack}" FontSize="24" FontFamily="Courier New">Main menu</Button>
-                <Button Grid.Column="1" FontFamily="Courier New" FontSize="24">Save</Button>
+                <Button Grid.Column="1" Click="Button_Click" FontFamily="Courier New" FontSize="24">Save</Button>
             </Grid>
-            <TextBlock Grid.Row="2" Text="{Binding Path=CountDownTimer}" VerticalAlignment="Center" FontSize="24" FontFamily="Courier New"></TextBlock>
+            <TextBlock x:Name="CountDownTimer" Text="Remaining time: 30" Grid.Row="2" FontSize="24" FontFamily="Courier New" VerticalAlignment="Center"></TextBlock>
         </Grid>
     </Grid>
 </Page>
