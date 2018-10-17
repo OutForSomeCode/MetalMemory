@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.Timers;
 
 namespace MetalMemory
 {
@@ -26,21 +27,20 @@ namespace MetalMemory
         public ScoreDisplay()
         {
             InitializeComponent();
-            Game_Loaded();
         }
 
         private void Game_Loaded()
         {
-            DispatcherTimer CountDown = new DispatcherTimer();
-            CountDown.Interval = TimeSpan.FromSeconds(1);
-            CountDown.Tick += Timer_Elapsed;
+            Timer CountDown = new Timer(1000);
+            CountDown.Elapsed += Timer_Elapsed;
+            CountDown.AutoReset = true;
             CountDown.Start();
         }
 
         private void Timer_Elapsed(object sender, EventArgs e)
         {
             TimeRemaining--;
-            CountDownTimer.Text = "Remaining time: " + TimeRemaining.ToString();
+            //CountDownTimer.Text = "Remaining time: " + TimeRemaining.ToString();
 
             if (TimeRemaining == 0)
             {

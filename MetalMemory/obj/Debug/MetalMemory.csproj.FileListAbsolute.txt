@@ -66,3 +66,4 @@ C:\Users\rolan\Documents\GitHub\MetalMemory\MetalMemory\obj\Debug\MetalMemory.cs
 C:\Users\rolan\Documents\GitHub\MetalMemory\MetalMemory\obj\Debug\MetalMemory.exe
 C:\Users\rolan\Documents\GitHub\MetalMemory\MetalMemory\obj\Debug\MetalMemory.pdb
 C:\Users\rolan\Documents\GitHub\MetalMemory\MetalMemory\obj\Debug\App.baml
+C:\Users\rolan\Documents\GitHub\MetalMemory\MetalMemory\obj\Debug\MetalMemory.csprojAssemblyReference.cache
