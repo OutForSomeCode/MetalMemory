@@ -15,13 +15,5 @@ namespace MetalMemory
         {
             //hier kun je var koppelen aan de column/row
         }
-
-        private void Flip_Card(object sender, MouseButtonEventArgs e)
-        {
-            Image Card = (Image)sender;
-            ImageSource Face = (ImageSource)Card.Tag;
-            Card.Source = Face;
-        }
-
     }
 }

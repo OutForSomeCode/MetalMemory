@@ -31,9 +31,10 @@ namespace MetalMemory
             InitializeComponent();            
         }
         
+        //new game knop
         private void NewGame_Click(object sender, RoutedEventArgs e)
         {
-            //Check which amount of cards is chosen --> set amount columns & rows
+            //kijkt welke hoeveelheid kaarten gekozen is --> geeft aan hoeveel kolommen en rijen daarvoor nodig zijn
             if (Cards16.IsChecked == true)
             {
                 GridColumn = 4;
@@ -50,6 +51,7 @@ namespace MetalMemory
                 GridRows = 8;
             }
 
+            //start de verschillende game onderdelen
             StartGame = new InitializeMemoryGrid(MemoryGrid, GridColumn, GridRows);
             SetCards = new InitializeCards(MemoryGrid, GridColumn, GridRows);
             GameLogic = new GameLogic(GridColumn, GridRows);
@@ -58,6 +60,7 @@ namespace MetalMemory
             GetUserInterface.NavigationService.Navigate(new UserInterface());
         }
 
+        //load game knop
         private void LoadGame_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new LoadGame());

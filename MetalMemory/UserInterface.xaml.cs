@@ -21,9 +21,9 @@ namespace MetalMemory
     /// </summary>
     public partial class UserInterface : Page
     {
-        private int TimeRemaining = 30;
+        private int TimeRemaining = 30;             //geeft aan hoeveel tijd er nog over is
 
-        public bool TurnOfPlayer1 = true;
+        public bool TurnOfPlayer1 = true;           //geeft aan wie er aan de beurt is
         public bool TurnOfPlayer2 = false;
 
         public UserInterface()
@@ -34,24 +34,24 @@ namespace MetalMemory
 
         private void Game_Loaded()
         {
-            Timer CountDown = new Timer(1000);
-            CountDown.Elapsed += Timer_Elapsed;
-            CountDown.AutoReset = true;
-            CountDown.Start();
+            Timer CountDown = new Timer(1000);      //nieuwe timer van 1 seconde         
+            CountDown.Elapsed += Timer_Elapsed;     //trigger (elke seconde) 
+            CountDown.AutoReset = true;             //timer blijft loopen
+            CountDown.Start();                      //start de timer
         }
 
         private void Timer_Elapsed(object sender, EventArgs e)
         {
-            TimeRemaining--;
-            Dispatcher.Invoke(new Action(() => CountDownTimer.Text = string.Format("Remaining time: {0}:{1}", TimeRemaining / 60, TimeRemaining % 60)));            
+            TimeRemaining--;        //-1 elke seconde
+            Dispatcher.Invoke(new Action(() => CountDownTimer.Text = string.Format("Remaining time: {0}:{1}", TimeRemaining / 60, TimeRemaining % 60)));    //toont timer op het scherm             
 
-            if (TimeRemaining == 0)
+            if (TimeRemaining == 0)     //als timer 0 bereikt
             {
-                TurnOfPlayer1 = !TurnOfPlayer1;
-                Dispatcher.Invoke(new Action(() => WindowPlayer1.Text = TurnOfPlayer1.ToString()));
-                TurnOfPlayer2 = !TurnOfPlayer2;
-                Dispatcher.Invoke(new Action(() => WindowPlayer2.Text = TurnOfPlayer2.ToString()));
-                TimeRemaining = 31;
+                TurnOfPlayer1 = !TurnOfPlayer1;     //wissel van beurt
+                Dispatcher.Invoke(new Action(() => WindowPlayer1.Text = TurnOfPlayer1.ToString())); //test, aanpassen
+                TurnOfPlayer2 = !TurnOfPlayer2;     //wissel van beurt
+                Dispatcher.Invoke(new Action(() => WindowPlayer2.Text = TurnOfPlayer2.ToString())); //test, aanpassen
+                TimeRemaining = 31;     //set timer weer op 30 seconden
             }
         }
     }

@@ -49,7 +49,7 @@ namespace MetalMemory
             List<ImageSource> CardFaces = GetImageList();   //maakt een image lijst CardFaces en vult deze met afbeeldingen uit GetImageList
             for (int i = 0; i < columns; i++)               //loopt door de kolommen (links naar rechts)
             {
-                for (int j = 0; j < rows; j++)              //loopt door de rijen (boven naar onderen)
+                for (int j = 0; j < rows; j++)              //per kolom, loopt door de rijen (boven naar onderen) en voert de code hieronder uit
                 {
                     Image CardBack = new Image();           //maakt een nieuwe image tag aan in xaml
                     CardBack.Source = new BitmapImage(new Uri("Images/Cards/CardBack.png", UriKind.Relative));  //geeft aan welke afbeelding te gebruiken als achterkant)
@@ -64,7 +64,7 @@ namespace MetalMemory
                 }
             }
         }
-        private void Flip_Card(object sender, MouseButtonEventArgs e)   //trigger
+        private void Flip_Card(object sender, MouseButtonEventArgs e)   //klik trigger
         {
             Image Card = (Image)sender;                                 //welke kaart geklikt wordt
             ImageSource Face = (ImageSource)Card.Tag;                   //"draait" de kaart om
