@@ -18,8 +18,6 @@ namespace MetalMemory
         private int TotalCards;
         private int UniqueCards;
 
-        //public MouseButtonEventHandler Flip_Card { get; private set; }
-
         public InitializeCards(Grid Publicgrid, int column, int row)
         {
             Localgrid = Publicgrid;
@@ -30,20 +28,20 @@ namespace MetalMemory
 
         private List<ImageSource> GetImageList()
         {
-            List<int> IntList = new List<int>(Enumerable.Range(1, 32));
-            List<ImageSource> Images = new List<ImageSource>();
+            List<int> IntList = new List<int>(Enumerable.Range(1, 32)); //maakt een lijst met de nummers 1 t/m 32
+            List<ImageSource> Images = new List<ImageSource>(); //maakt een lege lijst genaamd Images
 
-            var RandomIntList = IntList.OrderBy(x => RandomNumberGenerator.Next()).Take(UniqueCards);
-            
-                foreach (int CardNumber in RandomIntList)
-                {
-                    for (int i = 0; i < 2; i++)
+            var RandomIntList = IntList.OrderBy(x => RandomNumberGenerator.Next()).Take(UniqueCards); //Randomized de volgorde van de lijst met 32 nummers en pakt er (UniqueCards) uit
+
+            foreach (int CardNumber in RandomIntList) //voor elk nummer(int) uit RandomIntList voert hij de onderstaande code uit (hoe vaak? --> UniqueCards) 
+            {
+                    for (int i = 0; i < 2; i++) //zorgt ervoor dat van elke afbeelding 2 worden toegevoegd
                     {
-                        ImageSource source = new BitmapImage(new Uri("Images/Cards/Card" + CardNumber + ".png", UriKind.Relative));
+                        ImageSource source = new BitmapImage(new Uri("Images/Cards/Card" + CardNumber + ".png", UriKind.Relative)); //voegt de afbeeldingen aan de lijst Images toe
                         Images.Add(source);
                     }
                 }
-            return Images.OrderBy(y => RandomNumberGenerator.Next()).ToList(); //returns a list off shuffled images
+            return Images.OrderBy(y => RandomNumberGenerator.Next()).ToList(); //Randomized de volgorde van de lijst met kaarten
         }
 
         private void AddCardToGrid(int columns, int rows)
