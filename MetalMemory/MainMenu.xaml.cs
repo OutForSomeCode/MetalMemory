@@ -28,8 +28,8 @@ namespace MetalMemory
 
         private void Start_Click(object sender, EventArgs e)
         {
-            SoundPlayer PlaySounds = new SoundPlayer(@"C:\ButtonClickSound.wav");
-            PlaySounds.PlaySync();
+            //SoundPlayer PlaySounds = new SoundPlayer("/Sound/ButtonClickSound.waw");
+            //PlaySounds.PlaySync();
 
             NavigationService.Navigate(new InitializeGame());
         }

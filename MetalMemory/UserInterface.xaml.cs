@@ -22,6 +22,10 @@ namespace MetalMemory
     public partial class UserInterface : Page
     {
         private int TimeRemaining = 30;
+
+        public bool TurnOfPlayer1 = true;
+        public bool TurnOfPlayer2 = false;
+
         public UserInterface()
         {
             InitializeComponent();
@@ -43,8 +47,11 @@ namespace MetalMemory
 
             if (TimeRemaining == 0)
             {
-                //Switch player code here
-                TimeRemaining = 30;
+                TurnOfPlayer1 = !TurnOfPlayer1;
+                Dispatcher.Invoke(new Action(() => WindowPlayer1.Text = TurnOfPlayer1.ToString()));
+                TurnOfPlayer2 = !TurnOfPlayer2;
+                Dispatcher.Invoke(new Action(() => WindowPlayer2.Text = TurnOfPlayer2.ToString()));
+                TimeRemaining = 31;
             }
         }
     }

@@ -30,14 +30,20 @@ namespace MetalMemory
 
         private List<ImageSource> GetImageList()
         {
+            List<int> IntList = new List<int>(Enumerable.Range(1, 32));
             List<ImageSource> Images = new List<ImageSource>();
-            for (int i = 0; i < TotalCards; i++)
-            {
-                int CardNumber = i % UniqueCards + 1;
-                ImageSource source = new BitmapImage(new Uri("Images/Cards/Card" + CardNumber + ".png", UriKind.Relative));
-                Images.Add(source);
-            }
-            return Images.OrderBy(a => RandomNumberGenerator.Next()).ToList(); //returns a list off shuffled images
+
+            var RandomIntList = IntList.OrderBy(x => RandomNumberGenerator.Next()).Take(UniqueCards);
+            
+                foreach (int CardNumber in RandomIntList)
+                {
+                    for (int i = 0; i < 2; i++)
+                    {
+                        ImageSource source = new BitmapImage(new Uri("Images/Cards/Card" + CardNumber + ".png", UriKind.Relative));
+                        Images.Add(source);
+                    }
+                }
+            return Images.OrderBy(y => RandomNumberGenerator.Next()).ToList(); //returns a list off shuffled images
         }
 
         private void AddCardToGrid(int columns, int rows)

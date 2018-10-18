@@ -24,6 +24,12 @@
                 <Button Grid.Column="0" Command="{x:Static NavigationCommands.BrowseBack}" FontSize="24" FontFamily="Courier New">Main menu</Button>
                 <Button Grid.Column="1" FontFamily="Courier New" FontSize="24">Save</Button>
             </Grid>
+            <Grid Grid.Row="1">
+                <TextBlock x:Name="WindowPlayer1"></TextBlock>
+            </Grid>
+            <Grid Grid.Row="3">
+                <TextBlock x:Name="WindowPlayer2"></TextBlock>
+            </Grid>
             <TextBlock x:Name="CountDownTimer" Text="Remaining time: 0:30" Grid.Row="2" FontSize="24" FontFamily="Courier New" VerticalAlignment="Center"></TextBlock>
         </Grid>
     </Grid>
