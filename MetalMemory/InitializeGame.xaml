@@ -69,7 +69,7 @@
             
         </Grid>
         <Grid Panel.ZIndex="1000" Grid.Column="0">
-            <Frame x:Name="UserInterface"></Frame>
+            <Frame x:Name="GetUserInterface"></Frame>
         </Grid>
     </Grid>
 </Page>

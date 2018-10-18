@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Media;
 
 namespace MetalMemory
 {
@@ -25,8 +26,11 @@ namespace MetalMemory
             InitializeComponent();
         }
 
-        private void Start_Click(object sender, RoutedEventArgs e)
+        private void Start_Click(object sender, EventArgs e)
         {
+            SoundPlayer PlaySounds = new SoundPlayer(@"C:\ButtonClickSound.wav");
+            PlaySounds.PlaySync();
+
             NavigationService.Navigate(new InitializeGame());
         }
     }

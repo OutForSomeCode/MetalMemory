@@ -17,7 +17,8 @@ namespace MetalMemory
         private Random RandomNumberGenerator = new Random();
         private int TotalCards;
         private int UniqueCards;
-        
+
+        //public MouseButtonEventHandler Flip_Card { get; private set; }
 
         public InitializeCards(Grid Publicgrid, int column, int row)
         {
@@ -47,20 +48,20 @@ namespace MetalMemory
                 for (int j = 0; j < rows; j++)
                 {
                     Image CardBack = new Image();
-                    CardBack.Source = new BitmapImage(new Uri("/Images/Cards/CardBack.png", UriKind.Relative));
+                    CardBack.Source = new BitmapImage(new Uri("Images/Cards/CardBack.png", UriKind.Relative));
                     CardBack.Tag = CardFaces.First();
                     CardFaces.RemoveAt(0);
                     Grid.SetColumn(CardBack, i);
                     Grid.SetRow(CardBack, j);
                     Localgrid.Children.Add(CardBack);
 
-                    //Flip card trigger & Cursor   
-                    CardBack.MouseDown += new MouseButtonEventHandler(Card_Click);
+                    //Flip card trigger & Cursor
+                    CardBack.MouseLeftButtonUp += new MouseButtonEventHandler(Flip_Card);
                     CardBack.Cursor = Cursors.Hand;
                 }
             }
         }
-        private void Card_Click(object sender, MouseButtonEventArgs e)
+        private void Flip_Card(object sender, MouseButtonEventArgs e)
         {
             Image Card = (Image)sender;
             ImageSource Face = (ImageSource)Card.Tag;

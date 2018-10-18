@@ -24,6 +24,7 @@ namespace MetalMemory
         private int GridRows;
         InitializeMemoryGrid StartGame;
         InitializeCards SetCards;
+        GameLogic GameLogic;
 
         public InitializeGame()
         {
@@ -51,9 +52,10 @@ namespace MetalMemory
 
             StartGame = new InitializeMemoryGrid(MemoryGrid, GridColumn, GridRows);
             SetCards = new InitializeCards(MemoryGrid, GridColumn, GridRows);
+            GameLogic = new GameLogic(GridColumn, GridRows);
             
             //Userinterface --> playernames, scores, timer (left panel)
-            UserInterface.NavigationService.Navigate(new ScoreDisplay());
+            GetUserInterface.NavigationService.Navigate(new UserInterface());
         }
 
         private void LoadGame_Click(object sender, RoutedEventArgs e)

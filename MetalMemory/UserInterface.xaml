@@ -1,0 +1,30 @@
+﻿<Page x:Class="MetalMemory.UserInterface"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MetalMemory"
+      mc:Ignorable="d" 
+      d:DesignHeight="720" d:DesignWidth="560"
+      Title="UserInterface">
+
+    <Grid Background="White">
+        <Grid ShowGridLines="True">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="6*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="6*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Command="{x:Static NavigationCommands.BrowseBack}" FontSize="24" FontFamily="Courier New">Main menu</Button>
+                <Button Grid.Column="1" FontFamily="Courier New" FontSize="24">Save</Button>
+            </Grid>
+            <TextBlock x:Name="CountDownTimer" Text="Remaining time: 0:30" Grid.Row="2" FontSize="24" FontFamily="Courier New" VerticalAlignment="Center"></TextBlock>
+        </Grid>
+    </Grid>
+</Page>
