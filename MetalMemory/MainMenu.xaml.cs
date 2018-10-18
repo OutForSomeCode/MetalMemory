@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,8 +12,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Media;
+using System.Reflection;
 
 namespace MetalMemory
 {
@@ -28,7 +29,13 @@ namespace MetalMemory
 
         private void Start_Click(object sender, EventArgs e)
         {
-            //SoundPlayer PlaySounds = new SoundPlayer("/Sound/ButtonClickSound.waw");
+            string path = Assembly.GetExecutingAssembly().Location;
+            path = Path.GetDirectoryName(path);
+            path = Path.Combine(path, "Sounds/ButtonClickSound.wav");
+            SoundPlayer PlaySounds = new SoundPlayer(path);
+            PlaySounds.PlaySync();
+
+            //SoundPlayer PlaySounds = new SoundPlayer();
             //PlaySounds.PlaySync();
 
             NavigationService.Navigate(new InitializeGame());

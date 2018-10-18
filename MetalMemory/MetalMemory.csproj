@@ -171,8 +171,5 @@
     <Resource Include="Images\Cards\Card32.png" />
     <Resource Include="Images\Cards\Card9.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Sounds\ButtonClickSound.wav" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
