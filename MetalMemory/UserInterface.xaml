@@ -31,7 +31,7 @@
             </Grid>
             <Grid Grid.Row="2">
                 <TextBlock x:Name="CountDownTimer" Text="0:30" Grid.Row="2" FontSize="48" FontFamily="Courier New" VerticalAlignment="Center" Foreground="White" Panel.ZIndex="1" HorizontalAlignment="Center" TextDecorations="{x:Null}"/>
-                <Image Source="C:\Users\rolan\Documents\GitHub\MetalMemory\MetalMemory\Images\UserInterfaceSeperator.png" HorizontalAlignment="Center" VerticalAlignment="Center"></Image>
+                <Image Source="/Images/UserInterfaceSeperator.png" HorizontalAlignment="Center" VerticalAlignment="Center"></Image>
             </Grid>
             <Grid Grid.Row="3">
                 <Grid.RowDefinitions>
