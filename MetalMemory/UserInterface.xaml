@@ -7,14 +7,16 @@
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="560"
       Title="UserInterface">
-
-    <Grid Background="White">
+    <Page.Background>
+        <ImageBrush ImageSource="/Images/BackgroundUserInterface.png"/>
+    </Page.Background>
+    <Grid>
         <Grid ShowGridLines="True">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
-                <RowDefinition Height="6*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="6*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="5*"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
@@ -27,10 +29,22 @@
             <Grid Grid.Row="1">
                 <TextBlock x:Name="WindowPlayer1"></TextBlock>
             </Grid>
-            <Grid Grid.Row="3">
-                <TextBlock x:Name="WindowPlayer2"></TextBlock>
+            <Grid Grid.Row="2">
+                <TextBlock x:Name="CountDownTimer" Text="0:30" Grid.Row="2" FontSize="48" FontFamily="Courier New" VerticalAlignment="Center" Foreground="White" Panel.ZIndex="1" HorizontalAlignment="Center" TextDecorations="{x:Null}"/>
+                <Image Source="C:\Users\rolan\Documents\GitHub\MetalMemory\MetalMemory\Images\UserInterfaceSeperator.png" HorizontalAlignment="Center" VerticalAlignment="Center"></Image>
             </Grid>
-            <TextBlock x:Name="CountDownTimer" Text="Remaining time: 0:30" Grid.Row="2" FontSize="24" FontFamily="Courier New" VerticalAlignment="Center"></TextBlock>
+            <Grid Grid.Row="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="4*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+                <TextBlock Grid.Row="0" x:Name="WindowPlayer2"></TextBlock>
+            </Grid>
         </Grid>
     </Grid>
 </Page>

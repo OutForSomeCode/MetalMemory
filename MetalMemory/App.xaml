@@ -6,12 +6,12 @@
     <Application.Resources>
         <!--360 Clock wise Rotate effect-->
         <Storyboard x:Key="RotateClockWise" Storyboard.TargetProperty="RenderTransform.(RotateTransform.Angle)">
-            <DoubleAnimation From="0" To="360" BeginTime="0:0:0" Duration="0:0:8" RepeatBehavior="Forever"/>
+            <DoubleAnimation From="0" To="360" BeginTime="0:0:0" Duration="0:0:6" RepeatBehavior="Forever"/>
         </Storyboard>
 
         <!--360 Counter Clock wise Rotate effect-->
         <Storyboard x:Key="RotateCounterClockWise" Storyboard.TargetProperty="RenderTransform.(RotateTransform.Angle)">
-            <DoubleAnimation From="0" To="-360" BeginTime="0:0:0" Duration="0:0:6" RepeatBehavior="Forever"/>
+            <DoubleAnimation From="0" To="-360" BeginTime="0:0:0" Duration="0:0:10" RepeatBehavior="Forever"/>
         </Storyboard>
 
         <!--Transparent buttons-->

@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("sounds/buttonclicksound.wav")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/userinterfaceseperator.png")]
 
 

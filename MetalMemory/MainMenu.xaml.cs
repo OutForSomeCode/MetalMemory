@@ -38,5 +38,10 @@ namespace MetalMemory
 
             NavigationService.Navigate(new InitializeGame());                   //navigatie
         }
+
+        private void Exit_Click(object sender, MouseButtonEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
 }

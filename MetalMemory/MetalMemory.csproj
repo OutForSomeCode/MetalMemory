@@ -171,5 +171,11 @@
     <Resource Include="Images\Cards\Card32.png" />
     <Resource Include="Images\Cards\Card9.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\BackgroundUserInterface.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\UserInterfaceSeperator.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

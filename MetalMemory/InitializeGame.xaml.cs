@@ -51,7 +51,7 @@ namespace MetalMemory
                 GridRows = 8;
             }
 
-            //start de verschillende game onderdelen
+            //start de verschillende game onderdelen(geeft variabelen mee om in de class te gebruiken)
             StartGame = new InitializeMemoryGrid(MemoryGrid, GridColumn, GridRows);
             SetCards = new InitializeCards(MemoryGrid, GridColumn, GridRows);
             GameLogic = new GameLogic(GridColumn, GridRows);

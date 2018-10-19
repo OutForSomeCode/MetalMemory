@@ -35,12 +35,12 @@ namespace MetalMemory
 
             foreach (int CardNumber in RandomIntList)   //voor elk nummer(int) uit RandomIntList voert hij de onderstaande code uit (hoe vaak? --> UniqueCards) 
             {
-                    for (int i = 0; i < 2; i++)         //zorgt ervoor dat van elke afbeelding 2 worden toegevoegd
-                    {
-                        ImageSource source = new BitmapImage(new Uri("Images/Cards/Card" + CardNumber + ".png", UriKind.Relative));     //voegt de afbeeldingen aan de lijst Images toe
-                        Images.Add(source);
-                    }
+                for (int i = 0; i < 2; i++)         //zorgt ervoor dat van elke afbeelding 2 worden toegevoegd
+                {
+                    ImageSource source = new BitmapImage(new Uri("Images/Cards/Card" + CardNumber + ".png", UriKind.Relative));     //voegt de afbeeldingen aan de lijst Images toe
+                    Images.Add(source);
                 }
+            }
             return Images.OrderBy(y => RandomNumberGenerator.Next()).ToList();  //Randomized de volgorde van de lijst met afbeeldingen en zet deze in GetImageList
         }
 
@@ -64,6 +64,7 @@ namespace MetalMemory
                 }
             }
         }
+
         private void Flip_Card(object sender, MouseButtonEventArgs e)   //klik trigger
         {
             Image Card = (Image)sender;                                 //welke kaart geklikt wordt

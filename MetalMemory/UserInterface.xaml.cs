@@ -43,7 +43,17 @@ namespace MetalMemory
         private void Timer_Elapsed(object sender, EventArgs e)
         {
             TimeRemaining--;        //-1 elke seconde
-            Dispatcher.Invoke(new Action(() => CountDownTimer.Text = string.Format("Remaining time: {0}:{1}", TimeRemaining / 60, TimeRemaining % 60)));    //toont timer op het scherm             
+            Dispatcher.Invoke(new Action(() => CountDownTimer.Text = string.Format("{0}:{1}", TimeRemaining / 60, TimeRemaining % 60)));    //toont timer op het scherm             
+
+            if (TimeRemaining <= 5)
+            {
+                if (TimeRemaining % 2 == 1)
+                    Dispatcher.Invoke(new Action(() => CountDownTimer.Foreground = new SolidColorBrush(Colors.Red)));
+
+                else
+                    Dispatcher.Invoke(new Action(() => CountDownTimer.Foreground = new SolidColorBrush(Colors.White)));
+            }
+            
 
             if (TimeRemaining == 0)     //als timer 0 bereikt
             {
