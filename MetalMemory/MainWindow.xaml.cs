@@ -23,8 +23,31 @@ namespace MetalMemory
         public MainWindow()
         {
             InitializeComponent();
-            NavigationCommands.BrowseBack.InputGestures.Clear();
-            NavigationCommands.BrowseForward.InputGestures.Clear();
+            NavigationCommands.BrowseBack.InputGestures.Clear();            //ontkoppel terugfunctie
+            NavigationCommands.BrowseForward.InputGestures.Clear();         //ontkopper vooruitfunctie
+
+            Topmost = true;     //game start op de voorgrond
+            PreviewKeyDown +=
+                (s, e) =>
+                {
+                    if (e.Key == Key.F11)
+                    {
+                        if (WindowStyle != WindowStyle.SingleBorderWindow)      //checked of de game fullscreen staat
+                        {
+                            ResizeMode = ResizeMode.CanResize;                  //haalt de game uit fullscreen
+                            WindowStyle = WindowStyle.SingleBorderWindow;
+                            WindowState = WindowState.Normal;
+                            Topmost = false;
+                        }
+                        else
+                        {
+                            ResizeMode = ResizeMode.NoResize;                   //zet de game in fullscreen
+                            WindowStyle = WindowStyle.None;
+                            WindowState = WindowState.Maximized;
+                            Topmost = true;
+                        }
+                    }
+                };
         }
     }
 }
