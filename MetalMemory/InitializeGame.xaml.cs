@@ -20,6 +20,8 @@ namespace MetalMemory
     /// </summary>
     public partial class InitializeGame : Page
     {
+        private string Player1;
+        private string Player2;
         private int GridColumn;
         private int GridRows;
         InitializeMemoryGrid StartGame;
@@ -55,9 +57,11 @@ namespace MetalMemory
             StartGame = new InitializeMemoryGrid(MemoryGrid, GridColumn, GridRows);
             SetCards = new InitializeCards(MemoryGrid, GridColumn, GridRows);
             GameLogic = new GameLogic(GridColumn, GridRows);
-            
+
             //Userinterface --> playernames, scores, timer (left panel)
-            GetUserInterface.NavigationService.Navigate(new UserInterface());
+            Player1 = PlayerName_1.Text;
+            Player2 = PlayerName_2.Text;
+            GetUserInterface.NavigationService.Navigate(new UserInterface(Player1, Player2));
         }
 
         //load game knop

@@ -26,9 +26,11 @@ namespace MetalMemory
         public bool TurnOfPlayer1 = true;           //geeft aan wie er aan de beurt is
         public bool TurnOfPlayer2 = false;
 
-        public UserInterface()
+        public UserInterface(string Player1, string Player2)
         {
             InitializeComponent();
+            WindowPlayer1.Text = Player1;
+            WindowPlayer2.Text = Player2;
             Game_Loaded();
         }
 
@@ -58,9 +60,9 @@ namespace MetalMemory
             if (TimeRemaining == 0)     //als timer 0 bereikt
             {
                 TurnOfPlayer1 = !TurnOfPlayer1;     //wissel van beurt
-                Dispatcher.Invoke(new Action(() => WindowPlayer1.Text = TurnOfPlayer1.ToString())); //test, aanpassen
+                //Dispatcher.Invoke(new Action(() => WindowPlayer1.Text = TurnOfPlayer1.ToString())); //test, aanpassen
                 TurnOfPlayer2 = !TurnOfPlayer2;     //wissel van beurt
-                Dispatcher.Invoke(new Action(() => WindowPlayer2.Text = TurnOfPlayer2.ToString())); //test, aanpassen
+                //Dispatcher.Invoke(new Action(() => WindowPlayer2.Text = TurnOfPlayer2.ToString())); //test, aanpassen
                 TimeRemaining = 31;     //set timer weer op 30 seconden
             }
         }
