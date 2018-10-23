@@ -18,19 +18,20 @@ namespace MetalMemory
         private int TotalCards;                                         //lege variabele
         private int UniqueCards;                                        //lege variabele
 
+        private List<int> IntList = new List<int>(Enumerable.Range(1, 32));     //maakt een lijst met de nummers 1 t/m 32
+        private List<ImageSource> Images = new List<ImageSource>();             //maakt een lege afbeeldingen lijst genaamd Images
+
         public InitializeCards(Grid Publicgrid, int column, int row)    //geeft de grid naam, aantal kolommen & rijen mee
         {
             Localgrid = Publicgrid;         //vult Localgrid met Publicgrid
             TotalCards = column * row;      //Berekend het aantal kaarten
             UniqueCards = TotalCards / 2;   //geeft aan hoeveel unieke kaarten er zijn
-            AddCardToGrid(column, row);     //start de method(AddCardToGrid) en geeft de int column & row mee(deze worden uit InitializeCards gehaald)
+            Test2(IntList, Images);
+            AddCardToGrid(column, row);     //start de method(AddCardToGrid) en geeft de int column & row mee(deze worden uit InitializeCards gehaald)            
         }
 
-        private List<ImageSource> GetImageList()    //vult deze lijst met afbeeldingen die op de kaarten verschijnen
-        {
-            List<int> IntList = new List<int>(Enumerable.Range(1, 32));     //maakt een lijst met de nummers 1 t/m 32
-            List<ImageSource> Images = new List<ImageSource>();             //maakt een lege afbeeldingen lijst genaamd Images
-
+        private void Test2(List<int> IntList,List<ImageSource> Images)
+        { 
             var RandomIntList = IntList.OrderBy(x => RandomNumberGenerator.Next()).Take(UniqueCards);   //Randomized de volgorde van de lijst met 32 nummers en pakt er (UniqueCards) uit
 
             foreach (int CardNumber in RandomIntList)   //voor elk nummer(int) uit RandomIntList voert hij de onderstaande code uit (hoe vaak? --> UniqueCards) 
@@ -41,12 +42,17 @@ namespace MetalMemory
                     Images.Add(source);
                 }
             }
+        }
+
+        public List<ImageSource> GetImageList()    //vult deze lijst met afbeeldingen die op de kaarten verschijnen
+        {
             return Images.OrderBy(y => RandomNumberGenerator.Next()).ToList();  //Randomized de volgorde van de lijst met afbeeldingen en zet deze in GetImageList
         }
 
+        // ------------------------------- alles hieronder verplaatsen naar gamelogic ------------------------------------------------------------------------------------------------------
         private void AddCardToGrid(int columns, int rows)   //method met 2 variabelen 
         {
-            List<ImageSource> CardFaces = GetImageList();   //maakt een image lijst CardFaces en vult deze met afbeeldingen uit GetImageList
+            List<ImageSource> CardFaces = GetImageList();   //maakt een image lijst genaamt CardFaces en vult deze met afbeeldingen uit GetImageList
             for (int i = 0; i < columns; i++)               //loopt door de kolommen (links naar rechts)
             {
                 for (int j = 0; j < rows; j++)              //per kolom, loopt door de rijen (boven naar onderen) en voert de code hieronder uit
@@ -57,7 +63,7 @@ namespace MetalMemory
                     CardFaces.RemoveAt(0);                  //verbergt de voorkant van de kaart
                     Grid.SetColumn(CardBack, i);            //positie van de kaart in het grid (kolom)
                     Grid.SetRow(CardBack, j);               //positie van de kaart in het grid (rij)
-                    Localgrid.Children.Add(CardBack);       //voegt de opgegeven afbeelding toe aan de achterkant van alle kaarten
+                    Localgrid.Children.Add(CardBack);       //voegt de achterkant toe aan alle kaarten
 
                     CardBack.MouseLeftButtonUp += new MouseButtonEventHandler(Flip_Card);   //voegt een trigger toe aan de achterkant van de kaarten
                     CardBack.Cursor = Cursors.Hand;                                         //veranderd de cursor in een hand als je over de kaarten heen gaat
