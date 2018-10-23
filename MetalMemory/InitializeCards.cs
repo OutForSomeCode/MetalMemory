@@ -14,12 +14,12 @@ namespace MetalMemory
     class InitializeCards
     {
         private Grid Localgrid;                                         //lege variabele
-        private Random RandomNumberGenerator = new Random();            //lege variabele
+        private static Random RandomNumberGenerator = new Random();     //lege variabele
         private int TotalCards;                                         //lege variabele
         private int UniqueCards;                                        //lege variabele
 
         private List<int> IntList = new List<int>(Enumerable.Range(1, 32));     //maakt een lijst met de nummers 1 t/m 32
-        private List<ImageSource> Images = new List<ImageSource>();             //maakt een lege afbeeldingen lijst genaamd Images
+        private static List<ImageSource> Images = new List<ImageSource>();             //maakt een lege afbeeldingen lijst genaamd Images
 
         public InitializeCards(Grid Publicgrid, int column, int row)    //geeft de grid naam, aantal kolommen & rijen mee
         {
@@ -43,7 +43,7 @@ namespace MetalMemory
             }
         }
 
-        public List<ImageSource> GetImageList()    //vult deze lijst met afbeeldingen die op de kaarten verschijnen
+        static public List<ImageSource> GetImageList()    //vult deze lijst met afbeeldingen die op de kaarten verschijnen
         {
             return Images.OrderBy(y => RandomNumberGenerator.Next()).ToList();  //Randomized de volgorde van de lijst met afbeeldingen en zet deze in GetImageList
         } 
