@@ -56,7 +56,7 @@ namespace MetalMemory
             //start de verschillende game onderdelen(geeft variabelen mee om in de class te gebruiken)
             StartGame = new InitializeMemoryGrid(MemoryGrid, GridColumn, GridRows);
             SetCards = new InitializeCards(MemoryGrid, GridColumn, GridRows);
-            GameLogic = new GameLogic(GridColumn, GridRows);
+            GameLogic = new GameLogic(MemoryGrid, GridColumn, GridRows);
 
             //Userinterface --> playernames, scores, timer (left panel)
             Player1 = PlayerName_1.Text;
