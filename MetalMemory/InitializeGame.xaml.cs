@@ -25,7 +25,7 @@ namespace MetalMemory
         private int GridColumn;
         private int GridRows;
         InitializeMemoryGrid StartGame;
-        InitializeCards SetCards;
+        InitializeCards GetCards;
         GameLogic GameLogic;
 
         public InitializeGame()
@@ -55,13 +55,13 @@ namespace MetalMemory
 
             //start de verschillende game onderdelen(geeft variabelen mee om in de class te gebruiken)
             StartGame = new InitializeMemoryGrid(MemoryGrid, GridColumn, GridRows);
-            SetCards = new InitializeCards(GridColumn, GridRows);
+            GetCards = new InitializeCards(GridColumn, GridRows);
             GameLogic = new GameLogic(MemoryGrid, GridColumn, GridRows);
 
-            //Userinterface --> playernames, scores, timer (left panel)
+            //Userinterface --> playernames, gridsize(nodig voor reset)
             Player1 = PlayerName_1.Text;
             Player2 = PlayerName_2.Text;
-            UserInterfaceFrame.NavigationService.Navigate(new UserInterface(Player1, Player2));
+            UserInterfaceFrame.NavigationService.Navigate(new UserInterface(Player1, Player2, MemoryGrid, GridColumn, GridRows));
         }
 
         //load game knop

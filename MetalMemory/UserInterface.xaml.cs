@@ -21,16 +21,25 @@ namespace MetalMemory
     /// </summary>
     public partial class UserInterface : Page
     {
+        InitializeCards GetCards;
+        GameLogic GameLogic;
+
         private int TimeRemaining = 30;             //geeft aan hoeveel tijd er nog over is
+        private int GridColumn;
+        private int GridRows;
+        private Grid MemoryGrid;
 
         public bool TurnOfPlayer1 = true;           //geeft aan wie er aan de beurt is
         public bool TurnOfPlayer2 = false;
 
-        public UserInterface(string Player1, string Player2)
+        public UserInterface(string Player1, string Player2, Grid GetMemoryGrid, int GetGridColumn, int GetGridRows)
         {
             InitializeComponent();
             WindowPlayer1.Text = Player1;
             WindowPlayer2.Text = Player2;
+            GridColumn = GetGridColumn;
+            GridRows = GetGridRows;
+            MemoryGrid = GetMemoryGrid;
             Game_Loaded();
         }
 
@@ -69,7 +78,9 @@ namespace MetalMemory
 
         private void ResetGame_Click(object sender, RoutedEventArgs e)
         {
-            
+            GetCards = new InitializeCards(GridColumn, GridRows);
+            GameLogic = new GameLogic(MemoryGrid, GridColumn, GridRows);
+            TimeRemaining = 31;
         }
     }
 }
