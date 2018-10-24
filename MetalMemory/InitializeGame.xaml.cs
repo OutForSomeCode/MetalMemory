@@ -55,13 +55,13 @@ namespace MetalMemory
 
             //start de verschillende game onderdelen(geeft variabelen mee om in de class te gebruiken)
             StartGame = new InitializeMemoryGrid(MemoryGrid, GridColumn, GridRows);
-            SetCards = new InitializeCards(MemoryGrid, GridColumn, GridRows);
+            SetCards = new InitializeCards(GridColumn, GridRows);
             GameLogic = new GameLogic(MemoryGrid, GridColumn, GridRows);
 
             //Userinterface --> playernames, scores, timer (left panel)
             Player1 = PlayerName_1.Text;
             Player2 = PlayerName_2.Text;
-            GetUserInterface.NavigationService.Navigate(new UserInterface(Player1, Player2));
+            UserInterfaceFrame.NavigationService.Navigate(new UserInterface(Player1, Player2));
         }
 
         //load game knop

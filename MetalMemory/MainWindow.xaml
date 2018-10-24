@@ -6,9 +6,7 @@
         xmlns:local="clr-namespace:MetalMemory"
         mc:Ignorable="d"
         Title="MainWindow" Height="720" Width="1280" Source="MainMenu.xaml"
-        ShowsNavigationUI="false"
-        WindowState="Maximized"
-        WindowStyle="None">
+        ShowsNavigationUI="true">
     <NavigationWindow.Background>
         <ImageBrush ImageSource="Images/BackgroundMenu.png"/>
     </NavigationWindow.Background>

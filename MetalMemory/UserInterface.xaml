@@ -7,9 +7,11 @@
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="560"
       Title="UserInterface">
+    
     <Page.Background>
         <ImageBrush ImageSource="/Images/BackgroundUserInterface.png"/>
     </Page.Background>
+    
     <Grid>
         <Grid ShowGridLines="True">
             <Grid.RowDefinitions>
@@ -20,11 +22,15 @@
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="3*"/>
                 </Grid.ColumnDefinitions>
                 <Button Grid.Column="0" Command="{x:Static NavigationCommands.BrowseBack}" FontSize="24" FontFamily="Courier New">Main menu</Button>
-                <Button Grid.Column="1" FontFamily="Courier New" FontSize="24">Save</Button>
+                <Button Grid.Column="1" FontFamily="Courier New" FontSize="24">P</Button>
+                <Button Grid.Column="2" Click="ResetGame_Click" FontFamily="Courier New" FontSize="24">R</Button>
+                <Button Grid.Column="3" FontFamily="Courier New" FontSize="24">Save</Button>
             </Grid>
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>

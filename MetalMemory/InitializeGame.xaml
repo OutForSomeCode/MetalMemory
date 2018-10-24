@@ -7,7 +7,11 @@
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="1280"
       Title="InitializeGame">
-
+    
+    <Page.Background>
+        <ImageBrush ImageSource="/Images/BackgroundInitializeGame.png"/>
+    </Page.Background>
+    
     <Grid ShowGridLines="True">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="43.75*"/>
@@ -69,7 +73,7 @@
             
         </Grid>
         <Grid Panel.ZIndex="1000" Grid.Column="0">
-            <Frame x:Name="GetUserInterface"></Frame>
+            <Frame x:Name="UserInterfaceFrame"></Frame>
         </Grid>
     </Grid>
 </Page>

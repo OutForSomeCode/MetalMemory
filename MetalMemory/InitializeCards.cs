@@ -13,17 +13,15 @@ namespace MetalMemory
 {
     class InitializeCards
     {
-        private Grid Localgrid;                                         //lege variabele
         private static Random RandomNumberGenerator = new Random();     //lege variabele
         private int TotalCards;                                         //lege variabele
         private int UniqueCards;                                        //lege variabele
 
-        private List<int> IntList = new List<int>(Enumerable.Range(1, 32));     //maakt een lijst met de nummers 1 t/m 32
-        private static List<ImageSource> Images = new List<ImageSource>();             //maakt een lege afbeeldingen lijst genaamd Images
+        private List<int> IntList = new List<int>(Enumerable.Range(1, 32));         //maakt een lijst met de nummers 1 t/m 32
+        private static List<ImageSource> Images = new List<ImageSource>();          //maakt een lege afbeeldingen lijst genaamd Images
 
-        public InitializeCards(Grid Publicgrid, int column, int row)    //geeft de grid naam, aantal kolommen & rijen mee
+        public InitializeCards(int column, int row)    //geeft de grid naam, aantal kolommen & rijen mee
         {
-            Localgrid = Publicgrid;         //vult Localgrid met Publicgrid
             TotalCards = column * row;      //Berekend het aantal kaarten
             UniqueCards = TotalCards / 2;   //geeft aan hoeveel unieke kaarten er zijn
             FillImages();                   //start de method(FillImages) en geeft                   
@@ -43,7 +41,7 @@ namespace MetalMemory
             }
         }
 
-        static public List<ImageSource> GetImageList()    //vult deze lijst met afbeeldingen die op de kaarten verschijnen
+        public static List<ImageSource> GetImageList()    //vult deze lijst met afbeeldingen die op de kaarten verschijnen
         {
             return Images.OrderBy(y => RandomNumberGenerator.Next()).ToList();  //Randomized de volgorde van de lijst met afbeeldingen en zet deze in GetImageList
         } 

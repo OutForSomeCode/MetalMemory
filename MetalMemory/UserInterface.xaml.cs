@@ -66,5 +66,10 @@ namespace MetalMemory
                 TimeRemaining = 31;     //set timer weer op 30 seconden
             }
         }
+
+        private void ResetGame_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }
