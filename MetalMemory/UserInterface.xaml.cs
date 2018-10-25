@@ -81,6 +81,7 @@ namespace MetalMemory
             GetCards = new InitializeCards(GridColumn, GridRows);
             GameLogic = new GameLogic(MemoryGrid, GridColumn, GridRows);
             TimeRemaining = 31;
+            CountDownTimer.Foreground = new SolidColorBrush(Colors.White);
         }
     }
 }

@@ -66,7 +66,6 @@ C:\Users\rolan\Documents\GitHub\MetalMemory\MetalMemory\obj\Debug\MetalMemory.pd
 C:\Users\rolan\Documents\GitHub\MetalMemory\MetalMemory\obj\Debug\App.baml
 C:\Users\rolan\Documents\GitHub\MetalMemory\MetalMemory\obj\Debug\UserInterface.g.cs
 C:\Users\rolan\Documents\GitHub\MetalMemory\MetalMemory\obj\Debug\UserInterface.baml
-C:\Users\rolan\Documents\GitHub\MetalMemory\MetalMemory\obj\Debug\MetalMemory.csprojAssemblyReference.cache
 C:\Users\andry\Documents\GitHub\memorygame\MetalMemory\bin\Debug\MetalMemory.exe.config
 C:\Users\andry\Documents\GitHub\memorygame\MetalMemory\bin\Debug\MetalMemory.exe
 C:\Users\andry\Documents\GitHub\memorygame\MetalMemory\bin\Debug\MetalMemory.pdb
@@ -91,3 +90,4 @@ C:\Users\andry\Documents\GitHub\memorygame\MetalMemory\obj\Debug\MetalMemory.csp
 C:\Users\andry\Documents\GitHub\memorygame\MetalMemory\obj\Debug\MetalMemory.csproj.CoreCompileInputs.cache
 C:\Users\andry\Documents\GitHub\memorygame\MetalMemory\obj\Debug\MetalMemory.exe
 C:\Users\andry\Documents\GitHub\memorygame\MetalMemory\obj\Debug\MetalMemory.pdb
+C:\Users\rolan\Documents\GitHub\MetalMemory\MetalMemory\obj\Debug\MetalMemory.csprojAssemblyReference.cache

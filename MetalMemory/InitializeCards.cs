@@ -13,18 +13,21 @@ namespace MetalMemory
 {
     class InitializeCards
     {
-        private static Random RandomNumberGenerator = new Random();     //lege variabele
+        public static List<ImageSource> GetImageList = new List<ImageSource>();
+
+        private Random RandomNumberGenerator = new Random();     
         private int TotalCards;                                         //lege variabele
         private int UniqueCards;                                        //lege variabele
 
-        private List<int> IntList = new List<int>(Enumerable.Range(1, 32));         //maakt een lijst met de nummers 1 t/m 32
-        private static List<ImageSource> Images = new List<ImageSource>();          //maakt een lege afbeeldingen lijst genaamd Images
+        private List<int> IntList = new List<int>(Enumerable.Range(1, 32));             //maakt een lijst met de nummers 1 t/m 32
+        private List<ImageSource> Images = new List<ImageSource>();                     //maakt een lege afbeeldingen lijst genaamd Images
 
         public InitializeCards(int column, int row)    //geeft de grid naam, aantal kolommen & rijen mee
         {
             TotalCards = column * row;      //Berekend het aantal kaarten
             UniqueCards = TotalCards / 2;   //geeft aan hoeveel unieke kaarten er zijn
-            FillImages();                   //start de method(FillImages) en geeft                   
+            FillImages();                   //start de method(FillImages) en geeft
+            GetImageList = Images.OrderBy(y => RandomNumberGenerator.Next()).ToList();  //Randomized de volgorde van de lijst met afbeeldingen en zet deze in GetImageList
         }
 
         private void FillImages()
@@ -40,11 +43,6 @@ namespace MetalMemory
                 }
             }
         }
-
-        public static List<ImageSource> GetImageList()    //vult deze lijst met afbeeldingen die op de kaarten verschijnen
-        {
-            return Images.OrderBy(y => RandomNumberGenerator.Next()).ToList();  //Randomized de volgorde van de lijst met afbeeldingen en zet deze in GetImageList
-        } 
     }
 }
 

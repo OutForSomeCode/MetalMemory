@@ -13,16 +13,17 @@ namespace MetalMemory
     class GameLogic
     {
         private Grid Localgrid;
+        private List<ImageSource> CardFaces = new List<ImageSource>();
 
         public GameLogic(Grid Publicgrid, int column, int row)
-        {      
+        {
             Localgrid = Publicgrid;                         //vult Localgrid met Publicgrid
             AddCardToGrid(column, row);                     //start de method(AddCardToGrid) en geeft de int column & row mee(deze worden uit InitializeCards gehaald)
         }
 
         private void AddCardToGrid(int columns, int rows)   //method met 2 variabelen 
         {
-            List<ImageSource> CardFaces = InitializeCards.GetImageList();       //maakt een image lijst genaamt CardFaces en vult deze met afbeeldingen uit GetImageList
+            CardFaces = InitializeCards.GetImageList;                           //maakt een image lijst genaamt CardFaces en vult deze met afbeeldingen uit GetImageList  
             for (int i = 0; i < columns; i++)                                   //loopt door de kolommen (links naar rechts)
             {
                 for (int j = 0; j < rows; j++)                                  //per kolom, loopt door de rijen (boven naar onderen) en voert de code hieronder uit
@@ -43,7 +44,7 @@ namespace MetalMemory
 
         private void Flip_Card(object sender, MouseButtonEventArgs e)   //klik trigger
         {
-            PlaySounds SoundPlayer = new PlaySounds("CardSound.wav");
+            PlaySounds SoundPlayer = new PlaySounds("CardSound.wav", "Play");
 
             Image Card = (Image)sender;                                 //welke kaart geklikt wordt
             ImageSource Face = (ImageSource)Card.Tag;                   //"draait" de kaart om
