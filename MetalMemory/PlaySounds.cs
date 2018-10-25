@@ -18,6 +18,10 @@ namespace MetalMemory
         {
             FileName = FileToPlay;
             PlayType = TypeToPlay;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 94567cdcb5317d15dc57514d6ae6f2d3e50fdaf8
             Play();
         }
 
@@ -26,6 +30,7 @@ namespace MetalMemory
             string path = Assembly.GetExecutingAssembly().Location;             //kijkt waar de .exe staat
             path = Path.GetDirectoryName(path);                                 //geeft het pad naar de .exe terug als string
             path = Path.Combine(path, "Sounds/" + FileName);                    //combineerd het pad naar de .exe met het pad naar het geluids bestand
+<<<<<<< HEAD
             SoundPlayer PlaySounds = new SoundPlayer(path);                     //maakt een soundplayer aan met verwijzing naar het geluids bestand                                                  
 
             if (PlayType == "PlaySync")
@@ -39,6 +44,24 @@ namespace MetalMemory
             if (PlayType == "Play")
             {
                 PlaySounds.Play();                                              //speelt het geluid af
+=======
+            SoundPlayer PlaySounds = new SoundPlayer(path);                     //maakt een soundplayer aan met verwijzing naar het geluids bestand
+
+
+            if (PlayType == "PlaySync")                                         //speelt het geluid af, en pauseert de code tot het geluit klaar is met afspelen
+            {
+                PlaySounds.PlaySync();
+            }                                                                   
+
+            if (PlayType == "PlayLoop")                                          //speelt het geluid af in een loop
+            {
+                PlaySounds.PlayLooping();
+            }
+
+            if (PlayType == "Play")                                             //speelt het geluid af
+            {
+                PlaySounds.Play();
+>>>>>>> 94567cdcb5317d15dc57514d6ae6f2d3e50fdaf8
             }
         }
     }

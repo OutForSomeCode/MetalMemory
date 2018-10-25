@@ -36,6 +36,8 @@ namespace MetalMemory
         //new game knop
         private void NewGame_Click(object sender, RoutedEventArgs e)
         {
+            PlaySounds SoundPlayer = new PlaySounds("ButtonClickSound.wav", "Play");
+
             //kijkt welke hoeveelheid kaarten gekozen is --> geeft aan hoeveel kolommen en rijen daarvoor nodig zijn
             if (Cards16.IsChecked == true)
             {
@@ -67,6 +69,8 @@ namespace MetalMemory
         //load game knop
         private void LoadGame_Click(object sender, RoutedEventArgs e)
         {
+            PlaySounds SoundPlayer = new PlaySounds("ButtonClickSound.wav", "Play");
+
             NavigationService.Navigate(new LoadGame());
         }
     }
