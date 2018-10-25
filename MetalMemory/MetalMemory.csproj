@@ -172,10 +172,13 @@
     <Resource Include="Images\Cards\Card9.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\BackgroundUserInterface.png" />
+    <Resource Include="Images\UserInterfaceSeperator.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\UserInterfaceSeperator.png" />
+    <Resource Include="Images\BackgroundInitializeGame.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\BackgroundUserInterface.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

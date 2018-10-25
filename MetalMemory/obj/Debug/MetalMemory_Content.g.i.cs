@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/userinterfaceseperator.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/backgrounduserinterface.png")]
 
 
