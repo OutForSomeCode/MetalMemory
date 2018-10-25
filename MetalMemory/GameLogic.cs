@@ -43,6 +43,8 @@ namespace MetalMemory
 
         private void Flip_Card(object sender, MouseButtonEventArgs e)   //klik trigger
         {
+            PlaySounds SoundPlayer = new PlaySounds("CardSound.wav");
+
             Image Card = (Image)sender;                                 //welke kaart geklikt wordt
             ImageSource Face = (ImageSource)Card.Tag;                   //"draait" de kaart om
             Card.Source = Face;
