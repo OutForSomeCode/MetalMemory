@@ -25,7 +25,7 @@ namespace MetalMemory
             path = Path.GetDirectoryName(path);                                 //geeft het pad naar de .exe terug als string
             path = Path.Combine(path, "Sounds/" + FileName);                    //combineerd het pad naar de .exe met het pad naar het geluids bestand
             SoundPlayer PlaySounds = new SoundPlayer(path);                     //maakt een soundplayer aan met verwijzing naar het geluids bestand
-            PlaySounds.PlaySync();                                              //speelt het geluid af, en pauseert de code tot het geluit klaar is met afspelen
+            PlaySounds.Play();                                                  //speelt het geluid af, en pauseert de code tot het geluit klaar is met afspelen
         }
     }
 }
