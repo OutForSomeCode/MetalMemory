@@ -12,10 +12,13 @@ namespace MetalMemory
     class PlaySounds
     {
         private string FileName;
+        private string PlayType;
 
-        public PlaySounds(string FileToPlay)
+        public PlaySounds(string FileToPlay, string TypeToPlay)
         {
             FileName = FileToPlay;
+            PlayType = TypeToPlay;
+
             Play();
         }
 
@@ -25,7 +28,22 @@ namespace MetalMemory
             path = Path.GetDirectoryName(path);                                 //geeft het pad naar de .exe terug als string
             path = Path.Combine(path, "Sounds/" + FileName);                    //combineerd het pad naar de .exe met het pad naar het geluids bestand
             SoundPlayer PlaySounds = new SoundPlayer(path);                     //maakt een soundplayer aan met verwijzing naar het geluids bestand
-            PlaySounds.Play();                                                  //speelt het geluid af, en pauseert de code tot het geluit klaar is met afspelen
+
+
+            if (PlayType == "PlaySync")                                         //speelt het geluid af, en pauseert de code tot het geluit klaar is met afspelen
+            {
+                PlaySounds.PlaySync();
+            }                                                                   
+
+            if (PlayType == "PlayLoop")                                          //speelt het geluid af in een loop
+            {
+                PlaySounds.PlayLooping();
+            }
+
+            if (PlayType == "Play")                                             //speelt het geluid af
+            {
+                PlaySounds.Play();
+            }
         }
     }
 }

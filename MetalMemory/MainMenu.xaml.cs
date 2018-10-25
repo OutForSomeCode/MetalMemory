@@ -30,14 +30,14 @@ namespace MetalMemory
         //start knop
         private void Start_Click(object sender, EventArgs e)
         {
-            PlaySounds SoundPlayer = new PlaySounds("ButtonClickSound.wav");                                          //speelt het geluid af, en pauseert de code tot het geluit klaar is met afspelen
+            PlaySounds SoundPlayer = new PlaySounds("ButtonClickSound.wav", "Play");                                          //speelt het geluid af
 
             NavigationService.Navigate(new InitializeGame());                   //navigatie
         }
 
         private void Exit_Click(object sender, MouseButtonEventArgs e)         
         {
-            PlaySounds SoundPlayer = new PlaySounds("ButtonClickSound.wav");
+            PlaySounds SoundPlayer = new PlaySounds("ButtonClickSound.wav", "PlaySync");                                       //speelt het geluid af, en pauseert de code tot het geluit klaar is met afspelen
 
             Application.Current.Shutdown();                                     //exit game
         }
