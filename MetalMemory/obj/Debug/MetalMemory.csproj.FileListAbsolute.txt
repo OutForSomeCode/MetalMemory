@@ -90,4 +90,3 @@ C:\Users\andry\Documents\GitHub\memorygame\MetalMemory\obj\Debug\MetalMemory.csp
 C:\Users\andry\Documents\GitHub\memorygame\MetalMemory\obj\Debug\MetalMemory.csproj.CoreCompileInputs.cache
 C:\Users\andry\Documents\GitHub\memorygame\MetalMemory\obj\Debug\MetalMemory.exe
 C:\Users\andry\Documents\GitHub\memorygame\MetalMemory\obj\Debug\MetalMemory.pdb
-C:\Users\rolan\Documents\GitHub\MetalMemory\MetalMemory\obj\Debug\MetalMemory.csprojAssemblyReference.cache

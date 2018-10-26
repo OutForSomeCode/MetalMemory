@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,7 @@ namespace MetalMemory
     class GameLogic
     {
         private Grid Localgrid;
-        private List<ImageSource> CardFaces = new List<ImageSource>();
+        private List<Button> Cards = new List<Button>();
 
         public GameLogic(Grid Publicgrid, int column, int row)
         {
@@ -23,32 +24,40 @@ namespace MetalMemory
 
         private void AddCardToGrid(int columns, int rows)   //method met 2 variabelen 
         {
-            CardFaces = InitializeCards.GetImageList;                           //maakt een image lijst genaamt CardFaces en vult deze met afbeeldingen uit GetImageList  
+            Cards = InitializeCards.GetCardList;                           //maakt een image lijst genaamt CardFaces en vult deze met afbeeldingen uit GetImageList  
             for (int i = 0; i < columns; i++)                                   //loopt door de kolommen (links naar rechts)
             {
                 for (int j = 0; j < rows; j++)                                  //per kolom, loopt door de rijen (boven naar onderen) en voert de code hieronder uit
                 {
-                    Image CardBack = new Image();                               //maakt een nieuwe image tag aan in xaml
-                    CardBack.Source = new BitmapImage(new Uri("Images/Cards/CardBack.png", UriKind.Relative));  //geeft aan welke afbeelding te gebruiken als achterkant)
-                    CardBack.Tag = CardFaces.First();                           //voegt een afbeelding to aan de voorkant van de kaart)
-                    CardFaces.RemoveAt(0);                                      //verwijdert de kaart uit de lijst, zodat hij niet nog een keer gebruikt kan worden
-                    Grid.SetColumn(CardBack, i);                                //positie van de kaart in het grid (kolom)
-                    Grid.SetRow(CardBack, j);                                   //positie van de kaart in het grid (rij)
-                    Localgrid.Children.Add(CardBack);                           //voegt de achterkant toe aan alle kaarten
+                    //vult het grid met buttons. aan deze buttons hangt een tag met de info voor kaartnummer, voorkant, achterkant & false/true 
+                    Button Card = new Button();                    
+                    Card = Cards.First();
+                    Cards.RemoveAt(0);                                      //verwijdert de button na het plaatsen zodat hij niet nog een keer gebruikt kan worden
 
-                    CardBack.MouseLeftButtonUp += new MouseButtonEventHandler(Flip_Card);   //voegt een trigger toe aan de achterkant van de kaarten
-                    CardBack.Cursor = Cursors.Hand;                                         //veranderd de cursor in een hand als je over de kaarten heen gaat
+                    //haalt de info voor de achterkant uit de tag 
+                    Image CardFace = new Image();
+                    CardFace.Source = ((InitializeCards.CardTagData)Card.Tag).SourceCardBack;
+                    Card.Content = CardFace;
+
+                    //plaatst de kaart op het speelveld
+                    Grid.SetColumn(Card, i);                                //positie van de kaart in het grid (kolom)
+                    Grid.SetRow(Card, j);                                   //positie van de kaart in het grid (rij)
+                    Localgrid.Children.Add(Card);
+
+                    Card.Click += new RoutedEventHandler(Button_Click);
                 }
             }
         }
 
-        private void Flip_Card(object sender, MouseButtonEventArgs e)   //klik trigger
+        private void Button_Click(object sender, RoutedEventArgs e)   //klik trigger
         {
-            PlaySounds SoundPlayer = new PlaySounds("CardSound.wav", "Play");
+            Button ThisButton = sender as Button;
 
-            Image Card = (Image)sender;                                 //welke kaart geklikt wordt
-            ImageSource Face = (ImageSource)Card.Tag;                   //"draait" de kaart om
-            Card.Source = Face;
+            Image CardBack = new Image();
+            CardBack.Source = ((InitializeCards.CardTagData)ThisButton.Tag).SourceCardFace;
+            ThisButton.Content = CardBack;
+
+            PlaySounds SoundPlayer = new PlaySounds("CardSound.wav", "Play");
         }
     }
 }
