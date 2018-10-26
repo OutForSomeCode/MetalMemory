@@ -46,6 +46,7 @@ namespace MetalMemory
         private void Game_Loaded()
         {
             PlaySounds SoundPlayer = new PlaySounds("MemoryMusic.wav", "PlayLoop");
+
             Timer CountDown = new Timer(1000);      //nieuwe timer van 1 seconde         
             CountDown.Elapsed += Timer_Elapsed;     //trigger (elke seconde) 
             CountDown.AutoReset = true;             //timer blijft loopen

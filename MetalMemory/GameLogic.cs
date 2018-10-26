@@ -31,7 +31,7 @@ namespace MetalMemory
                     Image CardBack = new Image();                               //maakt een nieuwe image tag aan in xaml
                     CardBack.Source = new BitmapImage(new Uri("Images/Cards/CardBack.png", UriKind.Relative));  //geeft aan welke afbeelding te gebruiken als achterkant)
                     CardBack.Tag = CardFaces.First();                           //voegt een afbeelding to aan de voorkant van de kaart)
-                    CardFaces.RemoveAt(0);                                      //verbergt de voorkant van de kaart
+                    CardFaces.RemoveAt(0);                                      //verwijdert de kaart uit de lijst, zodat hij niet nog een keer gebruikt kan worden
                     Grid.SetColumn(CardBack, i);                                //positie van de kaart in het grid (kolom)
                     Grid.SetRow(CardBack, j);                                   //positie van de kaart in het grid (rij)
                     Localgrid.Children.Add(CardBack);                           //voegt de achterkant toe aan alle kaarten
