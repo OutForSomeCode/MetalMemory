@@ -24,7 +24,7 @@ namespace MetalMemory
         InitializeCards GetCards;
         GameLogic GameLogic;
 
-        private int TimeRemaining = 30;             //geeft aan hoeveel tijd er nog over is
+        public int TimeRemaining = 30;             //geeft aan hoeveel tijd er nog over is
         private int GridColumn;
         private int GridRows;
         private Grid MemoryGrid;

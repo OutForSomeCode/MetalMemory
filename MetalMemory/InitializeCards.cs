@@ -18,14 +18,14 @@ namespace MetalMemory
             public int IndexNumber;
             public ImageSource SourceCardFace;
             public ImageSource SourceCardBack;
-            public bool FaceUp;
+            public bool CardHidden;
 
-            public CardTagData(int CardNumber, ImageSource CardFace, ImageSource CardBack, bool CardFlip)
+            public CardTagData(int CardNumber, ImageSource CardFace, ImageSource CardBack, bool HideCard)
             {
                 IndexNumber = CardNumber;
                 SourceCardFace = CardFace;
                 SourceCardBack = CardBack;
-                FaceUp = CardFlip;
+                CardHidden = HideCard;
             }
         }
 
@@ -54,12 +54,12 @@ namespace MetalMemory
             {
                 ImageSource CardFace = new BitmapImage(new Uri("Images/Cards/Card" + CardNumber + ".png", UriKind.Relative));
                 ImageSource CardBack = new BitmapImage(new Uri("Images/Cards/CardBack.png", UriKind.Relative));
-                bool CardFlip = false;
+                bool HideCard = false;
 
                 for (int i = 0; i < 2; i++)
                 {
                     Button Card = new Button();
-                    Card.Tag = new CardTagData(CardNumber, CardFace, CardBack, CardFlip);
+                    Card.Tag = new CardTagData(CardNumber, CardFace, CardBack, HideCard);
                     Buttons.Add(Card);
                 }
             }
