@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Controls;
+using System.Timers;
 using System.Windows.Input;
 
 namespace MetalMemory
@@ -13,42 +15,118 @@ namespace MetalMemory
     class GameLogic
     {
         private Grid Localgrid;
-        private List<ImageSource> CardFaces = new List<ImageSource>();
+        private Timer ShowCardsTimer;
+        private List<Button> CardsList = new List<Button>();
+        private List<Button> ChosenCardsList = new List<Button>();
+        private List<int> CardCompareList = new List<int>();
 
         public GameLogic(Grid Publicgrid, int column, int row)
         {
             Localgrid = Publicgrid;                         //vult Localgrid met Publicgrid
             AddCardToGrid(column, row);                     //start de method(AddCardToGrid) en geeft de int column & row mee(deze worden uit InitializeCards gehaald)
+
+            ShowCardsTimer = new Timer(2000);                    //nieuwe timer van 2 seconden         
+            ShowCardsTimer.AutoReset = false;                    //timer loopt maar 1 keer
+
+            ShowCardsTimer.Elapsed += CompareCardsTimer_Elapsed;                   //trigger als de timer afloopt
         }
 
         private void AddCardToGrid(int columns, int rows)   //method met 2 variabelen 
         {
-            CardFaces = InitializeCards.GetImageList;                           //maakt een image lijst genaamt CardFaces en vult deze met afbeeldingen uit GetImageList  
-            for (int i = 0; i < columns; i++)                                   //loopt door de kolommen (links naar rechts)
+            CardsList = InitializeCards.GetCardList;                        //maakt een image lijst genaamt CardFaces en vult deze met afbeeldingen uit GetImageList  
+            for (int i = 0; i < columns; i++)                               //loopt door de kolommen (links naar rechts)
             {
-                for (int j = 0; j < rows; j++)                                  //per kolom, loopt door de rijen (boven naar onderen) en voert de code hieronder uit
+                for (int j = 0; j < rows; j++)                              //per kolom, loopt door de rijen (boven naar onderen) en voert de code hieronder uit
                 {
-                    Image CardBack = new Image();                               //maakt een nieuwe image tag aan in xaml
-                    CardBack.Source = new BitmapImage(new Uri("Images/Cards/CardBack.png", UriKind.Relative));  //geeft aan welke afbeelding te gebruiken als achterkant)
-                    CardBack.Tag = CardFaces.First();                           //voegt een afbeelding to aan de voorkant van de kaart)
-                    CardFaces.RemoveAt(0);                                      //verwijdert de kaart uit de lijst, zodat hij niet nog een keer gebruikt kan worden
-                    Grid.SetColumn(CardBack, i);                                //positie van de kaart in het grid (kolom)
-                    Grid.SetRow(CardBack, j);                                   //positie van de kaart in het grid (rij)
-                    Localgrid.Children.Add(CardBack);                           //voegt de achterkant toe aan alle kaarten
+                    //vult het grid met buttons. aan deze buttons hangt een tag met de info voor kaartnummer, voorkant, achterkant & false/true 
+                    Button Card = new Button();                    
+                    Card = CardsList.First();
+                    CardsList.RemoveAt(0);                                      //verwijdert de button na het plaatsen zodat hij niet nog een keer gebruikt kan worden
 
-                    CardBack.MouseLeftButtonUp += new MouseButtonEventHandler(Flip_Card);   //voegt een trigger toe aan de achterkant van de kaarten
-                    CardBack.Cursor = Cursors.Hand;                                         //veranderd de cursor in een hand als je over de kaarten heen gaat
+                    //haalt de info voor de achterkant uit de tag 
+                    Image CardBack = new Image();
+                    CardBack.Source = ((InitializeCards.CardTagData)Card.Tag).SourceCardBack;
+                    Card.Content = CardBack;
+
+                    //plaatst de kaart op het speelveld
+                    Grid.SetColumn(Card, i);                                //positie van de kaart in het grid (kolom)
+                    Grid.SetRow(Card, j);                                   //positie van de kaart in het grid (rij)
+                    Localgrid.Children.Add(Card);
+
+                    Card.Click += new RoutedEventHandler(Button_Click);
                 }
             }
         }
 
-        private void Flip_Card(object sender, MouseButtonEventArgs e)   //klik trigger
+        private void Button_Click(object sender, RoutedEventArgs e)         //klik trigger
         {
+            Button ThisButton = sender as Button;
+
+            if (ShowCardsTimer.Enabled) return;
+
             PlaySounds SoundPlayer = new PlaySounds("CardSound.wav", "Play");
 
-            Image Card = (Image)sender;                                 //welke kaart geklikt wordt
-            ImageSource Face = (ImageSource)Card.Tag;                   //"draait" de kaart om
-            Card.Source = Face;
+            Image CardFace = new Image();
+            CardFace.Source = ((InitializeCards.CardTagData)ThisButton.Tag).SourceCardFace;
+            ThisButton.Content = CardFace;
+
+            ChosenCards(ThisButton);
+            CompareCards();
         }
+
+        private void ChosenCards(Button ThisButton)
+        {
+            int CardIndex = ((InitializeCards.CardTagData)ThisButton.Tag).IndexNumber;
+            CardCompareList.Add(CardIndex);
+
+            ChosenCardsList.Add(ThisButton);
+            if (ChosenCardsList.Count < 2) return;
+        }
+
+        private void CompareCards()
+        {
+            // doe miks als er nog geen 2 kaarten zijn geselecteerd
+            if (CardCompareList.Count < 2) return;
+
+            else
+                ShowCardsTimer.Enabled = true;
+        }
+
+        private void CompareCardsTimer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            // als de kaarten gelijk zijn
+            if (CardCompareList[0] == CardCompareList[1])
+            {
+                foreach (Button Card in ChosenCardsList)
+                {
+                    Application.Current.Dispatcher.Invoke((Action)delegate
+                    {
+                        ((InitializeCards.CardTagData)Card.Tag).CardHidden = true;
+                        Card.Visibility = Visibility.Hidden;
+                    });
+                }
+                // leeg de vergelijk & gekozen kaarten lijsten
+                CardCompareList.Clear();
+                ChosenCardsList.Clear();
+            }
+
+            // als de kaarten NIET gelijk zijn
+            else
+            {
+                foreach (Button Card in ChosenCardsList)
+                {
+                    Application.Current.Dispatcher.Invoke((Action)delegate
+                    {
+                        Image CardBack = new Image();
+                        CardBack.Source = ((InitializeCards.CardTagData)Card.Tag).SourceCardBack;
+                        Card.Content = CardBack;
+                    });
+                }
+                // leeg de vergelijk & gekozen kaarten lijsten
+                CardCompareList.Clear();
+                ChosenCardsList.Clear();
+            }
+        }
+        
     }
 }

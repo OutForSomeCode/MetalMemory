@@ -24,7 +24,7 @@ namespace MetalMemory
         InitializeCards GetCards;
         GameLogic GameLogic;
 
-        private int TimeRemaining = 30;             //geeft aan hoeveel tijd er nog over is
+        public int TimeRemaining = 30;             //geeft aan hoeveel tijd er nog over is
         private int GridColumn;
         private int GridRows;
         private Grid MemoryGrid;
@@ -45,7 +45,7 @@ namespace MetalMemory
 
         private void Game_Loaded()
         {
-            PlaySounds SoundPlayer = new PlaySounds("MemoryMusic.wav", "PlayLoop");
+            //PlaySounds SoundPlayer = new PlaySounds("MemoryMusic.wav", "PlayLoop");
 
             Timer CountDown = new Timer(1000);      //nieuwe timer van 1 seconde         
             CountDown.Elapsed += Timer_Elapsed;     //trigger (elke seconde) 
