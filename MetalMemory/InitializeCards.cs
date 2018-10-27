@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -42,12 +43,16 @@ namespace MetalMemory
         {
             TotalCards = column * row;      //Berekend het aantal kaarten
             UniqueCards = TotalCards / 2;   //geeft aan hoeveel unieke kaarten er zijn
-            FillImages();                   //start de method(FillImages) en geeft
+            FillButtonsList();                   //start de method(FillImages) en geeft
             GetCardList = Buttons.OrderBy(y => RandomNumberGenerator.Next()).ToList();  //Randomized de volgorde van de lijst met afbeeldingen en zet deze in GetImageList
         }
 
-        private void FillImages()
+        private void FillButtonsList()
         { 
+            Style CardStyle = new Style(typeof(Button));
+            CardStyle.Setters.Add(new Setter(Button.BackgroundProperty, Brushes.Transparent));
+            CardStyle.Setters.Add(new Setter(Button.BorderBrushProperty, Brushes.Transparent));
+
             var RandomIntList = IntList.OrderBy(x => RandomNumberGenerator.Next()).Take(UniqueCards);   //Randomized de volgorde van de lijst met 32 nummers en pakt er (UniqueCards) uit
 
             foreach (int CardNumber in RandomIntList)   //voor elk nummer(int) uit RandomIntList voert hij de onderstaande code uit (hoe vaak? --> UniqueCards) 
@@ -59,6 +64,7 @@ namespace MetalMemory
                 for (int i = 0; i < 2; i++)
                 {
                     Button Card = new Button();
+                    Card.Style = CardStyle;
                     Card.Tag = new CardTagData(CardNumber, CardFace, CardBack, HideCard);
                     Buttons.Add(Card);
                 }

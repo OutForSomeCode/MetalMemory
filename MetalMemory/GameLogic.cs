@@ -14,43 +14,47 @@ namespace MetalMemory
 {
     class GameLogic
     {
+        private bool TurnOfPlayer1 = true;
+        private int ScoreOfPlayer1 = 0;
+        private bool TurnOfPlayer2 = false;
+        private int ScoreOfPlayer2 = 0;
+        
         private Grid Localgrid;
-        private Timer ShowCardsTimer;
+        public static Timer EndOfTurnTimer;
         private List<Button> CardsList = new List<Button>();
         private List<Button> ChosenCardsList = new List<Button>();
         private List<int> CardCompareList = new List<int>();
 
         public GameLogic(Grid Publicgrid, int column, int row)
         {
-            Localgrid = Publicgrid;                         //vult Localgrid met Publicgrid
-            AddCardToGrid(column, row);                     //start de method(AddCardToGrid) en geeft de int column & row mee(deze worden uit InitializeCards gehaald)
+            Localgrid = Publicgrid;                                         // vult Localgrid met Publicgrid
+            AddCardToGrid(column, row);                                     // start de method(AddCardToGrid) en geeft de int column & row mee(deze worden uit InitializeCards gehaald)
 
-            ShowCardsTimer = new Timer(2000);                    //nieuwe timer van 2 seconden         
-            ShowCardsTimer.AutoReset = false;                    //timer loopt maar 1 keer
-
-            ShowCardsTimer.Elapsed += CompareCardsTimer_Elapsed;                   //trigger als de timer afloopt
+            EndOfTurnTimer = new Timer(2000);                               // nieuwe timer van 2 seconden         
+            EndOfTurnTimer.AutoReset = false;                               // timer loopt maar 1 keer
+            EndOfTurnTimer.Elapsed += EndOfTurnTimer_Elapsed;               // trigger als de timer afloopt
         }
 
-        private void AddCardToGrid(int columns, int rows)   //method met 2 variabelen 
+        private void AddCardToGrid(int columns, int rows)   
         {
-            CardsList = InitializeCards.GetCardList;                        //maakt een image lijst genaamt CardFaces en vult deze met afbeeldingen uit GetImageList  
-            for (int i = 0; i < columns; i++)                               //loopt door de kolommen (links naar rechts)
+            CardsList = InitializeCards.GetCardList;                        // maakt een image lijst genaamt CardFaces en vult deze met afbeeldingen uit GetImageList  
+            for (int i = 0; i < columns; i++)                               // loopt door de kolommen (links naar rechts)
             {
-                for (int j = 0; j < rows; j++)                              //per kolom, loopt door de rijen (boven naar onderen) en voert de code hieronder uit
+                for (int j = 0; j < rows; j++)                              // per kolom, loopt door de rijen (boven naar onderen) en voert de code hieronder uit
                 {
-                    //vult het grid met buttons. aan deze buttons hangt een tag met de info voor kaartnummer, voorkant, achterkant & false/true 
+                    // vult het grid met buttons. aan deze buttons hangt een tag met de info voor kaartnummer, voorkant, achterkant & false/true 
                     Button Card = new Button();                    
                     Card = CardsList.First();
-                    CardsList.RemoveAt(0);                                      //verwijdert de button na het plaatsen zodat hij niet nog een keer gebruikt kan worden
+                    CardsList.RemoveAt(0);                                  // verwijdert de button na het plaatsen zodat hij niet nog een keer gebruikt kan worden
 
-                    //haalt de info voor de achterkant uit de tag 
+                    // haalt de info voor de achterkant uit de tag 
                     Image CardBack = new Image();
                     CardBack.Source = ((InitializeCards.CardTagData)Card.Tag).SourceCardBack;
                     Card.Content = CardBack;
 
-                    //plaatst de kaart op het speelveld
-                    Grid.SetColumn(Card, i);                                //positie van de kaart in het grid (kolom)
-                    Grid.SetRow(Card, j);                                   //positie van de kaart in het grid (rij)
+                    // plaatst de kaart op het speelveld
+                    Grid.SetColumn(Card, i);                                // positie van de kaart in het grid (kolom)
+                    Grid.SetRow(Card, j);                                   // positie van de kaart in het grid (rij)
                     Localgrid.Children.Add(Card);
 
                     Card.Click += new RoutedEventHandler(Button_Click);
@@ -58,11 +62,11 @@ namespace MetalMemory
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)         //klik trigger
+        private void Button_Click(object sender, RoutedEventArgs e)         // klik trigger
         {
             Button ThisButton = sender as Button;
 
-            if (ShowCardsTimer.Enabled) return;
+            if (EndOfTurnTimer.Enabled) return;
 
             PlaySounds SoundPlayer = new PlaySounds("CardSound.wav", "Play");
 
@@ -80,7 +84,6 @@ namespace MetalMemory
             CardCompareList.Add(CardIndex);
 
             ChosenCardsList.Add(ThisButton);
-            if (ChosenCardsList.Count < 2) return;
         }
 
         private void CompareCards()
@@ -89,13 +92,27 @@ namespace MetalMemory
             if (CardCompareList.Count < 2) return;
 
             else
-                ShowCardsTimer.Enabled = true;
+                EndOfTurnTimer.Enabled = true;
         }
 
-        private void CompareCardsTimer_Elapsed(object sender, ElapsedEventArgs e)
+        private void EndOfTurnTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
+            // als de beurt afloopt en er is maar 1 kaart omgedraaid
+            if (CardCompareList.Count < 2)
+            {
+                foreach (Button Card in ChosenCardsList)
+                {
+                    Application.Current.Dispatcher.Invoke((Action)delegate
+                    {
+                        Image CardBack = new Image();
+                        CardBack.Source = ((InitializeCards.CardTagData)Card.Tag).SourceCardBack;
+                        Card.Content = CardBack;
+                    });
+                }
+            }
+
             // als de kaarten gelijk zijn
-            if (CardCompareList[0] == CardCompareList[1])
+            else if (CardCompareList[0] == CardCompareList[1])
             {
                 foreach (Button Card in ChosenCardsList)
                 {
@@ -103,11 +120,9 @@ namespace MetalMemory
                     {
                         ((InitializeCards.CardTagData)Card.Tag).CardHidden = true;
                         Card.Visibility = Visibility.Hidden;
+                        // score toekenen
                     });
                 }
-                // leeg de vergelijk & gekozen kaarten lijsten
-                CardCompareList.Clear();
-                ChosenCardsList.Clear();
             }
 
             // als de kaarten NIET gelijk zijn
@@ -122,11 +137,15 @@ namespace MetalMemory
                         Card.Content = CardBack;
                     });
                 }
-                // leeg de vergelijk & gekozen kaarten lijsten
-                CardCompareList.Clear();
-                ChosenCardsList.Clear();
             }
-        }
-        
+
+            // leeg de vergelijk & gekozen kaarten lijsten
+            CardCompareList.Clear();
+            ChosenCardsList.Clear();
+
+            // beurt wisselen
+            TurnOfPlayer1 = !TurnOfPlayer1;
+            TurnOfPlayer2 = !TurnOfPlayer2;
+        } 
     }
 }

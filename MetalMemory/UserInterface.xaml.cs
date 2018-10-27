@@ -22,15 +22,12 @@ namespace MetalMemory
     public partial class UserInterface : Page
     {
         InitializeCards GetCards;
-        GameLogic GameLogic;
+        GameLogic StartGameLogic;
 
-        public int TimeRemaining = 30;             //geeft aan hoeveel tijd er nog over is
+        public static int TimeRemaining = 30;       //geeft aan hoeveel tijd er nog over is
         private int GridColumn;
         private int GridRows;
         private Grid MemoryGrid;
-
-        public bool TurnOfPlayer1 = true;           //geeft aan wie er aan de beurt is
-        public bool TurnOfPlayer2 = false;
 
         public UserInterface(string Player1, string Player2, Grid GetMemoryGrid, int GetGridColumn, int GetGridRows)
         {
@@ -47,17 +44,19 @@ namespace MetalMemory
         {
             //PlaySounds SoundPlayer = new PlaySounds("MemoryMusic.wav", "PlayLoop");
 
-            Timer CountDown = new Timer(1000);      //nieuwe timer van 1 seconde         
-            CountDown.Elapsed += Timer_Elapsed;     //trigger (elke seconde) 
-            CountDown.AutoReset = true;             //timer blijft loopen
-            CountDown.Start();                      //start de timer
+            Timer CountDown = new Timer(1000);      // nieuwe timer van 1 seconde         
+            CountDown.AutoReset = true;             // timer blijft loopen
+            CountDown.Start();                      // start de timer
+            CountDown.Elapsed += Timer_Elapsed;     // trigger (elke seconde)
         }
 
         private void Timer_Elapsed(object sender, EventArgs e)
         {
-            TimeRemaining--;        //-1 elke seconde
-            Dispatcher.Invoke(new Action(() => CountDownTimer.Text = string.Format("{0}:{1}", TimeRemaining / 60, TimeRemaining % 60)));    //toont timer op het scherm             
+            // toont timer op het scherm
+            TimeRemaining--;
+            Dispatcher.Invoke(new Action(() => CountDownTimer.Text = string.Format("{0}:{1}", TimeRemaining / 60, TimeRemaining % 60)));             
 
+            // timer knippert rood laatste 5 seconden
             if (TimeRemaining <= 5)
             {
                 if (TimeRemaining % 2 == 1)
@@ -66,22 +65,25 @@ namespace MetalMemory
                 else
                     Dispatcher.Invoke(new Action(() => CountDownTimer.Foreground = new SolidColorBrush(Colors.White)));
             }
-            
 
-            if (TimeRemaining == 0)     //als timer 0 bereikt
+            // als timer 2 bereikt, start method die ook de kaartcheck doet
+            if (TimeRemaining == 2)
             {
-                TurnOfPlayer1 = !TurnOfPlayer1;     //wissel van beurt
-                //Dispatcher.Invoke(new Action(() => WindowPlayer1.Text = TurnOfPlayer1.ToString())); //test, aanpassen
-                TurnOfPlayer2 = !TurnOfPlayer2;     //wissel van beurt
-                //Dispatcher.Invoke(new Action(() => WindowPlayer2.Text = TurnOfPlayer2.ToString())); //test, aanpassen
-                TimeRemaining = 31;     //set timer weer op 30 seconden
+                GameLogic.EndOfTurnTimer.Enabled = true;
+            }
+
+            // als timer 0 bereikt, zet de timer weer op 30 seconden (+1 ivm updaten)
+            if (TimeRemaining == 0)     
+            {
+                TimeRemaining = 31;
             }
         }
 
+        // reset de game en haalt een nieuwe set kaarten op
         private void ResetGame_Click(object sender, RoutedEventArgs e)
         {
             GetCards = new InitializeCards(GridColumn, GridRows);
-            GameLogic = new GameLogic(MemoryGrid, GridColumn, GridRows);
+            StartGameLogic = new GameLogic(MemoryGrid, GridColumn, GridRows);
             TimeRemaining = 31;
             CountDownTimer.Foreground = new SolidColorBrush(Colors.White);
         }
