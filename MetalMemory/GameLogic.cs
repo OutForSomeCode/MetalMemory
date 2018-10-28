@@ -15,10 +15,10 @@ namespace MetalMemory
     class GameLogic
     {
         private bool TurnOfPlayer1 = true;
-        private int ScoreOfPlayer1 = 0;
-        private bool TurnOfPlayer2 = false;
-        private int ScoreOfPlayer2 = 0;
-        
+        private int ScoreMultiplier = 1;
+        public static int ScoreOfPlayer1 = 0;
+        public static int ScoreOfPlayer2 = 0;
+                
         private Grid Localgrid;
         public static Timer EndOfTurnTimer;
         private List<Button> CardsList = new List<Button>();
@@ -100,15 +100,7 @@ namespace MetalMemory
             // als de beurt afloopt en er is maar 1 kaart omgedraaid
             if (CardCompareList.Count < 2)
             {
-                foreach (Button Card in ChosenCardsList)
-                {
-                    Application.Current.Dispatcher.Invoke((Action)delegate
-                    {
-                        Image CardBack = new Image();
-                        CardBack.Source = ((InitializeCards.CardTagData)Card.Tag).SourceCardBack;
-                        Card.Content = CardBack;
-                    });
-                }
+                EndOfTurn();
             }
 
             // als de kaarten gelijk zijn
@@ -120,32 +112,67 @@ namespace MetalMemory
                     {
                         ((InitializeCards.CardTagData)Card.Tag).CardHidden = true;
                         Card.Visibility = Visibility.Hidden;
-                        // score toekenen
                     });
                 }
+                PlayerScore();
             }
 
             // als de kaarten NIET gelijk zijn
             else
             {
-                foreach (Button Card in ChosenCardsList)
-                {
-                    Application.Current.Dispatcher.Invoke((Action)delegate
-                    {
-                        Image CardBack = new Image();
-                        CardBack.Source = ((InitializeCards.CardTagData)Card.Tag).SourceCardBack;
-                        Card.Content = CardBack;
-                    });
-                }
+                EndOfTurn();
             }
 
             // leeg de vergelijk & gekozen kaarten lijsten
             CardCompareList.Clear();
             ChosenCardsList.Clear();
 
+            // schermtimer resetten
+            UserInterface.TimeRemaining = 31;
+        }
+
+        private void EndOfTurn()
+        {
+            // draai de kaarten terug
+            foreach (Button Card in ChosenCardsList)
+            {
+                Application.Current.Dispatcher.Invoke((Action)delegate
+                {
+                    Image CardBack = new Image();
+                    CardBack.Source = ((InitializeCards.CardTagData)Card.Tag).SourceCardBack;
+                    Card.Content = CardBack;
+                });
+            }
             // beurt wisselen
             TurnOfPlayer1 = !TurnOfPlayer1;
-            TurnOfPlayer2 = !TurnOfPlayer2;
-        } 
+
+            // reset score multiplier
+            ScoreMultiplier = 1;
+        }
+        
+        private void PlayerScore()
+        {
+            if (TurnOfPlayer1 == true)
+            {
+                if (ScoreMultiplier > 1)
+                {
+                    ScoreOfPlayer1 *= ScoreMultiplier;
+                }
+
+                ScoreOfPlayer1 += 50;
+            }
+            else
+            {
+                if (ScoreMultiplier > 1)
+                {
+                    ScoreOfPlayer2 *= ScoreMultiplier;
+                }
+
+                ScoreOfPlayer2 += 50;
+            }
+
+            // set score multyplier
+            ScoreMultiplier++;
+        }
     }
 }

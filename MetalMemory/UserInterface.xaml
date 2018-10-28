@@ -35,14 +35,16 @@
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"/>
-                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
                 </Grid>
-                <TextBlock Grid.Row="0" x:Name="WindowPlayer1" FontSize="48" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                <TextBlock Grid.Row="0" x:Name="ScreenNamePlayer1" FontSize="48" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                <TextBlock Grid.Row="2" x:Name="ScreenScorePlayer1" FontSize="48" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left"/>
             </Grid>
             <Grid Grid.Row="2">
                 <TextBlock x:Name="CountDownTimer" Text="0:30" Grid.Row="2" FontSize="48" FontFamily="Courier New" VerticalAlignment="Center" Foreground="White" Panel.ZIndex="1" HorizontalAlignment="Center" TextDecorations="{x:Null}"/>
@@ -51,14 +53,16 @@
             <Grid Grid.Row="3">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"/>
-                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
                 </Grid>
-                <TextBlock Grid.Row="0" x:Name="WindowPlayer2" FontSize="48" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                <TextBlock Grid.Row="0" x:Name="ScreenNamePlayer2" FontSize="48" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                <TextBlock Grid.Row="2" x:Name="ScreenScorePlayer2" FontSize="48" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left"/>
             </Grid>
         </Grid>
     </Grid>

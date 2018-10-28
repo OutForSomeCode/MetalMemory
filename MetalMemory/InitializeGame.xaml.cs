@@ -20,8 +20,8 @@ namespace MetalMemory
     /// </summary>
     public partial class InitializeGame : Page
     {
-        private string Player1;
-        private string Player2;
+        public string Player1;
+        public string Player2;
         private int GridColumn;
         private int GridRows;
         InitializeMemoryGrid StartGame;

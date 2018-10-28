@@ -32,8 +32,8 @@ namespace MetalMemory
         public UserInterface(string Player1, string Player2, Grid GetMemoryGrid, int GetGridColumn, int GetGridRows)
         {
             InitializeComponent();
-            WindowPlayer1.Text = Player1;
-            WindowPlayer2.Text = Player2;
+            ScreenNamePlayer1.Text = Player1;
+            ScreenNamePlayer2.Text = Player2;
             GridColumn = GetGridColumn;
             GridRows = GetGridRows;
             MemoryGrid = GetMemoryGrid;
@@ -52,6 +52,10 @@ namespace MetalMemory
 
         private void Timer_Elapsed(object sender, EventArgs e)
         {
+            // update speler scores
+            Dispatcher.Invoke(new Action(() => ScreenScorePlayer1.Text = GameLogic.ScoreOfPlayer1.ToString()));
+            Dispatcher.Invoke(new Action(() => ScreenScorePlayer2.Text = GameLogic.ScoreOfPlayer2.ToString()));
+
             // toont timer op het scherm
             TimeRemaining--;
             Dispatcher.Invoke(new Action(() => CountDownTimer.Text = string.Format("{0}:{1}", TimeRemaining / 60, TimeRemaining % 60)));             
