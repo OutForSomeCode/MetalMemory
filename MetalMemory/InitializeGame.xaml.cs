@@ -20,8 +20,8 @@ namespace MetalMemory
     /// </summary>
     public partial class InitializeGame : Page
     {
-        public string Player1;
-        public string Player2;
+        public static string Player1;
+        public static string Player2;
         private int GridColumn;
         private int GridRows;
         InitializeMemoryGrid StartGame;
@@ -91,8 +91,6 @@ namespace MetalMemory
         private void LoadGame_Click(object sender, RoutedEventArgs e)
         {
             PlaySounds SoundPlayer = new PlaySounds("ButtonClickSound.wav", "Play");
-
-            NavigationService.Navigate(new LoadGame());
         }
     }
 }

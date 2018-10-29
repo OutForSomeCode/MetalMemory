@@ -58,6 +58,7 @@
     <Compile Include="GameLogic.cs" />
     <Compile Include="InitializeCards.cs" />
     <Compile Include="PlaySounds.cs" />
+    <Compile Include="SaveLoad.cs" />
     <Compile Include="UserInterface.xaml.cs">
       <DependentUpon>UserInterface.xaml</DependentUpon>
     </Compile>
@@ -181,5 +182,6 @@
   <ItemGroup>
     <Resource Include="Images\BackgroundUserInterface.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

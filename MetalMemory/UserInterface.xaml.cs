@@ -108,6 +108,11 @@ namespace MetalMemory
             GameLogic.ScoreOfPlayer2 = 0;
         }
 
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+            //SaveLoad.SaveSomthing();
+        }
+
         private void MainMenu_Click(object sender, RoutedEventArgs e)
         {
             CountDown.Stop();
