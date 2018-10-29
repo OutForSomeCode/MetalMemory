@@ -14,7 +14,7 @@ namespace MetalMemory
 {
     class GameLogic
     {
-        private bool TurnOfPlayer1 = true;
+        public static bool TurnOfPlayer1 = true;
         private int ScoreMultiplier = 1;
         public static int ScoreOfPlayer1 = 0;
         public static int ScoreOfPlayer2 = 0;

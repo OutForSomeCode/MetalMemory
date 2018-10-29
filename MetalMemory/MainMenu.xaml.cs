@@ -25,6 +25,7 @@ namespace MetalMemory
         public MainMenu()
         {
             InitializeComponent();
+            //ScoreBoardFrame.NavigationService.Navigate(new HighScore());
         }
 
         //start knop

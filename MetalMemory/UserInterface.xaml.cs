@@ -48,13 +48,26 @@ namespace MetalMemory
             CountDown.AutoReset = true;             // timer blijft loopen
             CountDown.Start();                      // start de timer
             CountDown.Elapsed += Timer_Elapsed;     // trigger (elke seconde)
+            CountDownTimer.Foreground = new SolidColorBrush(Colors.White);
         }
 
         private void Timer_Elapsed(object sender, EventArgs e)
         {
+            // highlight speler die aan de beurt is
+            if (GameLogic.TurnOfPlayer1 == true)
+            {
+                Dispatcher.Invoke(new Action(() => ScreenNamePlayer1.Foreground = new SolidColorBrush(Colors.Green)));
+                Dispatcher.Invoke(new Action(() => ScreenNamePlayer2.Foreground = new SolidColorBrush(Colors.Red)));
+            }
+            else
+            {
+                Dispatcher.Invoke(new Action(() => ScreenNamePlayer2.Foreground = new SolidColorBrush(Colors.Green)));
+                Dispatcher.Invoke(new Action(() => ScreenNamePlayer1.Foreground = new SolidColorBrush(Colors.Red)));
+            }
+
             // update speler scores
-            Dispatcher.Invoke(new Action(() => ScreenScorePlayer1.Text = GameLogic.ScoreOfPlayer1.ToString()));
-            Dispatcher.Invoke(new Action(() => ScreenScorePlayer2.Text = GameLogic.ScoreOfPlayer2.ToString()));
+            Dispatcher.Invoke(new Action(() => ScreenScorePlayer1.Text = "Score: " + GameLogic.ScoreOfPlayer1.ToString()));
+            Dispatcher.Invoke(new Action(() => ScreenScorePlayer2.Text = "Score: " + GameLogic.ScoreOfPlayer2.ToString()));
 
             // toont timer op het scherm
             TimeRemaining--;
@@ -89,7 +102,8 @@ namespace MetalMemory
             GetCards = new InitializeCards(GridColumn, GridRows);
             StartGameLogic = new GameLogic(MemoryGrid, GridColumn, GridRows);
             TimeRemaining = 31;
-            CountDownTimer.Foreground = new SolidColorBrush(Colors.White);
+            GameLogic.ScoreOfPlayer1 = 0;
+            GameLogic.ScoreOfPlayer2 = 0;
         }
     }
 }
