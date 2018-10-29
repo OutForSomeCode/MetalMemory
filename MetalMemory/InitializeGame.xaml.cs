@@ -22,8 +22,8 @@ namespace MetalMemory
     {
         public static string Player1;
         public static string Player2;
-        private int GridColumn;
-        private int GridRows;
+        public static int GridColumn;
+        public static int GridRows;
         InitializeMemoryGrid StartGame;
         InitializeCards GetCards;
         GameLogic GameLogic;
@@ -91,6 +91,13 @@ namespace MetalMemory
         private void LoadGame_Click(object sender, RoutedEventArgs e)
         {
             PlaySounds SoundPlayer = new PlaySounds("ButtonClickSound.wav", "Play");
+            SaveLoad.LoadSomething();
+
+            // Save functie aanpassen ==> als er gesaved word alle kaart Tags opslaan in GetTagDataList!!!!
+            StartGame = new InitializeMemoryGrid(MemoryGrid, GridColumn, GridRows);
+            // load functie die lijst op de juiste plaats terug zet
+            GameLogic = new GameLogic(MemoryGrid, GridColumn, GridRows);
+            UserInterfaceFrame.NavigationService.Navigate(new UserInterface(Player1, Player2, MemoryGrid, GridColumn, GridRows));
         }
     }
 }

@@ -21,7 +21,7 @@ namespace MetalMemory
                 
         private Grid Localgrid;
         public static Timer EndOfTurnTimer;
-        private List<Button> CardsList = new List<Button>();
+        private List<InitializeCards.CardTagData> TagDataList = new List<InitializeCards.CardTagData>();
         private List<Button> ChosenCardsList = new List<Button>();
         private List<int> CardCompareList = new List<int>();
 
@@ -37,15 +37,20 @@ namespace MetalMemory
 
         private void AddCardToGrid(int columns, int rows)   
         {
-            CardsList = InitializeCards.GetCardList;                        // maakt een lijst genaamt CardFaces en vult deze met buttons(afbeeldingen) uit GetCardList  
+            Style CardStyle = new Style(typeof(Button));
+            CardStyle.Setters.Add(new Setter(Button.BackgroundProperty, Brushes.Transparent));
+            CardStyle.Setters.Add(new Setter(Button.BorderBrushProperty, Brushes.Transparent));
+
+            TagDataList = InitializeCards.GetTagDataList;                   // maakt een lijst genaamt CardFaces en vult deze met buttons(afbeeldingen) uit GetCardList  
             for (int i = 0; i < columns; i++)                               // loopt door de kolommen (links naar rechts)
             {
                 for (int j = 0; j < rows; j++)                              // per kolom, loopt door de rijen (boven naar onderen)
                 {
                     // vult het grid met buttons. aan deze buttons hangt een tag met de info voor kaartnummer, voorkant, achterkant & false/true 
-                    Button Card = new Button();                    
-                    Card = CardsList.First();
-                    CardsList.RemoveAt(0);                                  // verwijdert de button na het plaatsen zodat hij niet nog een keer gebruikt kan worden
+                    Button Card = new Button();
+                    Card.Style = CardStyle;
+                    Card.Tag = TagDataList.First();
+                    TagDataList.RemoveAt(0);                                  // verwijdert de button na het plaatsen zodat hij niet nog een keer gebruikt kan worden
 
                     // haalt de info voor de achterkant uit de tag 
                     Image CardBack = new Image();

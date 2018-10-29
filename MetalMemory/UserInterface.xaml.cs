@@ -92,7 +92,7 @@ namespace MetalMemory
             // als timer 0 bereikt, zet de timer weer op 30 seconden (+1 ivm updaten)
             if (TimeRemaining == 0)     
             {
-                CountDownTimer.Foreground = new SolidColorBrush(Colors.White);
+                Dispatcher.Invoke(new Action(() => CountDownTimer.Foreground = new SolidColorBrush(Colors.White)));
                 TimeRemaining = 31;
             }
         }
@@ -110,7 +110,7 @@ namespace MetalMemory
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            //SaveLoad.SaveSomthing();
+            SaveLoad.SaveSomething();
         }
 
         private void MainMenu_Click(object sender, RoutedEventArgs e)

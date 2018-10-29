@@ -6,49 +6,62 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Runtime.Serialization;
 
 namespace MetalMemory
 {
     class SaveLoad
     {
-        private static BinaryFormatter BinaryFormatter = new BinaryFormatter();
         private static string SaveFile = "SaveGames/memory.sav";
 
-        private static Stream SaveFileStream = File.Open(SaveFile, FileMode.Create);
-
-        private static void Save(Stream SaveFileStream, Object obj)
+        [Serializable]
+        public class SaveData
         {
-            BinaryFormatter.Serialize(SaveFileStream, obj);
+            public List<InitializeCards.CardTagData> SavecardTagData;
+            public string SavePlayer1;
+            public string SavePlayer2;
+            public int SaveScoreOfPlayer1;
+            public int SaveScoreOfPlayer2;
+            public int SaveGridColumn;
+            public int SaveGridRows;
+            public bool SaveTurnOfPlayer1;
         }
 
-        public static void SaveSomthing()
+        public static void SaveSomething()
         {
-            Save(SaveFileStream, InitializeCards.GetCardList);
-            Save(SaveFileStream, GameLogic.TurnOfPlayer1);
-            Save(SaveFileStream, InitializeGame.Player1);
-            Save(SaveFileStream, GameLogic.ScoreOfPlayer1);
-            Save(SaveFileStream, InitializeGame.Player2);
-            Save(SaveFileStream, GameLogic.ScoreOfPlayer2);
+            SaveData obj = new SaveData();
 
-            SaveFileStream.Close();
+            obj.SavecardTagData = InitializeCards.GetTagDataList;
+            obj.SavePlayer1 = InitializeGame.Player1;
+            obj.SavePlayer2 = InitializeGame.Player2;
+            obj.SaveScoreOfPlayer1 = GameLogic.ScoreOfPlayer1;
+            obj.SaveScoreOfPlayer2 = GameLogic.ScoreOfPlayer2;
+            obj.SaveGridColumn = InitializeGame.GridColumn;
+            obj.SaveGridRows = InitializeGame.GridRows;
+            obj.SaveTurnOfPlayer1 = GameLogic.TurnOfPlayer1;
+
+            IFormatter formatter = new BinaryFormatter();
+            Stream stream = new FileStream(SaveFile, FileMode.Create, FileAccess.Write);
+
+            formatter.Serialize(stream, obj);
+            stream.Close();
         }
 
-        private bool CanLoad()
+        public static void LoadSomething()
         {
-            if (File.Exists(SaveFile))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-            
-        }
+            IFormatter formatter = new BinaryFormatter();
+            Stream stream = new FileStream(SaveFile, FileMode.Open, FileAccess.Read);
+            SaveData objnew = (SaveData)formatter.Deserialize(stream);
+            stream.Close();
 
-        private Object Load(Stream SaveFileStream)
-        {
-            return BinaryFormatter.Deserialize(SaveFileStream);
-        }
+            InitializeCards.GetTagDataList = objnew.SavecardTagData;
+            InitializeGame.Player1 = objnew.SavePlayer1;
+            InitializeGame.Player2 = objnew.SavePlayer2;
+            GameLogic.ScoreOfPlayer1 = objnew.SaveScoreOfPlayer1;
+            GameLogic.ScoreOfPlayer2 = objnew.SaveScoreOfPlayer2;
+            InitializeGame.GridColumn = objnew.SaveGridColumn;
+            InitializeGame.GridRows = objnew.SaveGridRows;
+            GameLogic.TurnOfPlayer1 = objnew.SaveTurnOfPlayer1;
+        } 
     }
 }
