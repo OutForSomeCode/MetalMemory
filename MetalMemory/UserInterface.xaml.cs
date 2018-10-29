@@ -28,6 +28,7 @@ namespace MetalMemory
         private int GridColumn;
         private int GridRows;
         private Grid MemoryGrid;
+        private Timer CountDown;
 
         public UserInterface(string Player1, string Player2, Grid GetMemoryGrid, int GetGridColumn, int GetGridRows)
         {
@@ -44,11 +45,10 @@ namespace MetalMemory
         {
             //PlaySounds SoundPlayer = new PlaySounds("MemoryMusic.wav", "PlayLoop");
 
-            Timer CountDown = new Timer(1000);      // nieuwe timer van 1 seconde         
+            CountDown = new Timer(1000);      // nieuwe timer van 1 seconde         
             CountDown.AutoReset = true;             // timer blijft loopen
             CountDown.Start();                      // start de timer
-            CountDown.Elapsed += Timer_Elapsed;     // trigger (elke seconde)
-            CountDownTimer.Foreground = new SolidColorBrush(Colors.White);
+            CountDown.Elapsed += Timer_Elapsed;     // trigger (elke seconde)  
         }
 
         private void Timer_Elapsed(object sender, EventArgs e)
@@ -92,6 +92,7 @@ namespace MetalMemory
             // als timer 0 bereikt, zet de timer weer op 30 seconden (+1 ivm updaten)
             if (TimeRemaining == 0)     
             {
+                CountDownTimer.Foreground = new SolidColorBrush(Colors.White);
                 TimeRemaining = 31;
             }
         }
@@ -101,9 +102,16 @@ namespace MetalMemory
         {
             GetCards = new InitializeCards(GridColumn, GridRows);
             StartGameLogic = new GameLogic(MemoryGrid, GridColumn, GridRows);
-            TimeRemaining = 31;
+            CountDownTimer.Foreground = new SolidColorBrush(Colors.White);
+            TimeRemaining = 31; 
             GameLogic.ScoreOfPlayer1 = 0;
             GameLogic.ScoreOfPlayer2 = 0;
+        }
+
+        private void MainMenu_Click(object sender, RoutedEventArgs e)
+        {
+            CountDown.Stop();
+            TimeRemaining = 31;            
         }
     }
 }
