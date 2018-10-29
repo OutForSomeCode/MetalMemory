@@ -37,10 +37,10 @@ namespace MetalMemory
 
         private void AddCardToGrid(int columns, int rows)   
         {
-            CardsList = InitializeCards.GetCardList;                        // maakt een image lijst genaamt CardFaces en vult deze met afbeeldingen uit GetImageList  
+            CardsList = InitializeCards.GetCardList;                        // maakt een lijst genaamt CardFaces en vult deze met buttons(afbeeldingen) uit GetCardList  
             for (int i = 0; i < columns; i++)                               // loopt door de kolommen (links naar rechts)
             {
-                for (int j = 0; j < rows; j++)                              // per kolom, loopt door de rijen (boven naar onderen) en voert de code hieronder uit
+                for (int j = 0; j < rows; j++)                              // per kolom, loopt door de rijen (boven naar onderen)
                 {
                     // vult het grid met buttons. aan deze buttons hangt een tag met de info voor kaartnummer, voorkant, achterkant & false/true 
                     Button Card = new Button();                    
@@ -57,40 +57,49 @@ namespace MetalMemory
                     Grid.SetRow(Card, j);                                   // positie van de kaart in het grid (rij)
                     Localgrid.Children.Add(Card);
 
+                    // maak de kaarten klikbaar
                     Card.Click += new RoutedEventHandler(Button_Click);
                 }
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)         // klik trigger
+        // als er op een kaart geklikt is doe het volgende:
+        private void Button_Click(object sender, RoutedEventArgs e)        
         {
+            // de kaart(button) die geklikt is
             Button ThisButton = sender as Button;
 
+            // als einde van de beurt al gestart is kun je geen kaarten meer omdraaien
             if (EndOfTurnTimer.Enabled) return;
 
+            // geluid voor het omdraaien van de kaart
             PlaySounds SoundPlayer = new PlaySounds("CardSound.wav", "Play");
 
+            // draai de kaart om
             Image CardFace = new Image();
             CardFace.Source = ((InitializeCards.CardTagData)ThisButton.Tag).SourceCardFace;
             ThisButton.Content = CardFace;
-
+  
             ChosenCards(ThisButton);
-            CompareCards();
+            StartEndOfTurn();
         }
-
+ 
         private void ChosenCards(Button ThisButton)
         {
+            // haalt het kaart nummer uit de "Tag"(informatie die aan elke kaart hangt) en zet deze in de lijst vergelijk
             int CardIndex = ((InitializeCards.CardTagData)ThisButton.Tag).IndexNumber;
             CardCompareList.Add(CardIndex);
 
+            // voegt de geklikte kaart toe aan de lijst gekozen kaarten
             ChosenCardsList.Add(ThisButton);
         }
 
-        private void CompareCards()
+        private void StartEndOfTurn()
         {
             // doe miks als er nog geen 2 kaarten zijn geselecteerd
             if (CardCompareList.Count < 2) return;
 
+            // start einde van de beurt
             else
                 EndOfTurnTimer.Enabled = true;
         }
@@ -131,6 +140,36 @@ namespace MetalMemory
             UserInterface.TimeRemaining = 31;
         }
 
+        // voegt score toe na de beurt(2 kaarten omgedraait)
+        private void PlayerScore()
+        {
+            // als speler 1 aan de beurt is
+            if (TurnOfPlayer1 == true)
+            {
+                if (ScoreMultiplier > 1)
+                {
+                    ScoreOfPlayer1 *= ScoreMultiplier;
+                }
+
+                ScoreOfPlayer1 += 50;
+            }
+            
+            // anders speler 2
+            else
+            {
+                if (ScoreMultiplier > 1)
+                {
+                    ScoreOfPlayer2 *= ScoreMultiplier;
+                }
+
+                ScoreOfPlayer2 += 50;
+            }
+
+            // set score multyplier
+            ScoreMultiplier++;
+        }
+
+        // einde beurt
         private void EndOfTurn()
         {
             // draai de kaarten terug
@@ -148,31 +187,6 @@ namespace MetalMemory
 
             // reset score multiplier
             ScoreMultiplier = 1;
-        }
-        
-        private void PlayerScore()
-        {
-            if (TurnOfPlayer1 == true)
-            {
-                if (ScoreMultiplier > 1)
-                {
-                    ScoreOfPlayer1 *= ScoreMultiplier;
-                }
-
-                ScoreOfPlayer1 += 50;
-            }
-            else
-            {
-                if (ScoreMultiplier > 1)
-                {
-                    ScoreOfPlayer2 *= ScoreMultiplier;
-                }
-
-                ScoreOfPlayer2 += 50;
-            }
-
-            // set score multyplier
-            ScoreMultiplier++;
         }
     }
 }

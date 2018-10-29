@@ -39,11 +39,11 @@ namespace MetalMemory
         private List<int> IntList = new List<int>(Enumerable.Range(1, 32));             //maakt een lijst met de nummers 1 t/m 32
         private List<Button> Buttons = new List<Button>();                     //maakt een lege afbeeldingen lijst genaamd Images
 
-        public InitializeCards(int column, int row)    //geeft de grid naam, aantal kolommen & rijen mee
+        public InitializeCards(int column, int row)     //geeft de grid naam, aantal kolommen & rijen mee
         {
-            TotalCards = column * row;      //Berekend het aantal kaarten
-            UniqueCards = TotalCards / 2;   //geeft aan hoeveel unieke kaarten er zijn
-            FillButtonsList();                   //start de method(FillImages) en geeft
+            TotalCards = column * row;                  //Berekend het aantal kaarten
+            UniqueCards = TotalCards / 2;               //geeft aan hoeveel unieke kaarten er zijn
+            FillButtonsList();                          //start de method(FillImages) en geeft
             GetCardList = Buttons.OrderBy(y => RandomNumberGenerator.Next()).ToList();  //Randomized de volgorde van de lijst met afbeeldingen en zet deze in GetImageList
         }
 
