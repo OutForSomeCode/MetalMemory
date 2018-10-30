@@ -201,19 +201,23 @@ namespace MetalMemory
             ScoreMultiplier = 1;
         }
 
+        // slaat de kaart data op
         public static void SaveDataTags()
         {
             for (int i = 0; i < Columns; i++)
             {
                 for (int j = 0; j < Rows; j++)
                 {
-                    Button Card = Localgrid.Children.Cast<Button>()
-                        .First(e => Grid.GetRow(e) == j && Grid.GetColumn(e) == i);
+                    // selecteer de button in het grid
+                    Button Card = Localgrid.Children.Cast<Button>().First(Btn => Grid.GetRow(Btn) == j && Grid.GetColumn(Btn) == i);
+
+                    // haal de tag data op
                     int CardNumber = ((InitializeCards.CardTagData)Card.Tag).IndexNumber;
                     string CardFace = ((InitializeCards.CardTagData)Card.Tag).SourceCardFace;
                     string CardBack = ((InitializeCards.CardTagData)Card.Tag).SourceCardBack;
                     bool HideCard = ((InitializeCards.CardTagData)Card.Tag).CardHidden;
 
+                    // zet de tag data in de lijst die opgelagen word 
                     var CardTag = new InitializeCards.CardTagData(CardNumber, CardFace, CardBack, HideCard);
                     InitializeCards.GetTagDataList.Add(CardTag);
                 }

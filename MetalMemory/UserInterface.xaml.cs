@@ -108,12 +108,14 @@ namespace MetalMemory
             GameLogic.ScoreOfPlayer2 = 0;
         }
 
+        // opslaan van de game
         private void Save_Click(object sender, RoutedEventArgs e)
         {
             GameLogic.SaveDataTags();
             SaveLoad.SaveSomething();
         }
 
+        // terug naar het hoofd menu
         private void MainMenu_Click(object sender, RoutedEventArgs e)
         {
             CountDown.Stop();

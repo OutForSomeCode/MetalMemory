@@ -14,7 +14,8 @@ namespace MetalMemory
 {
     class InitializeCards
     {
-        [Serializable]
+        // class die de info voor de Tag(word gekoppelt aan de kaarten) bevat
+        [Serializable] // geeft aan dat deze class omgezet kan worden in een stroom van data
         public class CardTagData
         {
             public int IndexNumber;
@@ -31,32 +32,32 @@ namespace MetalMemory
             }
         }
 
-        public static List<CardTagData> GetTagDataList = new List<CardTagData>();
+        public static List<CardTagData> GetTagDataList = new List<CardTagData>();       // lijst waar of nieuwe Tag info in word gezet of tag info uit een save file
 
         private Random RandomNumberGenerator = new Random();     
-        private int TotalCards;                                         //lege variabele
-        private int UniqueCards;                                        //lege variabele
+        private int TotalCards;
+        private int UniqueCards;
 
-        private List<int> IntList = new List<int>(Enumerable.Range(1, 32));             //maakt een lijst met de nummers 1 t/m 32
-        private List<CardTagData> ButtonTag = new List<CardTagData>();                  //maakt een lege afbeeldingen lijst genaamd Images
+        private List<int> IntList = new List<int>(Enumerable.Range(1, 32));             // maakt een lijst met de nummers 1 t/m 32
+        private List<CardTagData> ButtonTag = new List<CardTagData>();                  // maakt een lege afbeeldingen lijst genaamd Images
 
-        public InitializeCards(int column, int row)     //geeft de grid naam, aantal kolommen & rijen mee
+        public InitializeCards(int column, int row)     // geeft de grid naam, aantal kolommen & rijen mee
         {
-            TotalCards = column * row;                  //Berekend het aantal kaarten
-            UniqueCards = TotalCards / 2;               //geeft aan hoeveel unieke kaarten er zijn
-            FillButtonsList();                          //start de method(FillImages) en geeft
-            GetTagDataList = ButtonTag.OrderBy(y => RandomNumberGenerator.Next()).ToList();  //Randomized de volgorde van de lijst met afbeeldingen en zet deze in GetImageList
+            TotalCards = column * row;                  // Berekend het aantal kaarten
+            UniqueCards = TotalCards / 2;               // geeft aan hoeveel unieke kaarten er zijn
+            FillButtonsList();                          // start de method(FillImages) en geeft
+            GetTagDataList = ButtonTag.OrderBy(y => RandomNumberGenerator.Next()).ToList();  // Randomized de volgorde van de lijst met afbeeldingen en zet deze in GetImageList
         }
 
         private void FillButtonsList()
         { 
-            var RandomIntList = IntList.OrderBy(x => RandomNumberGenerator.Next()).Take(UniqueCards);   //Randomized de volgorde van de lijst met 32 nummers en pakt er (UniqueCards) uit
+            var RandomIntList = IntList.OrderBy(x => RandomNumberGenerator.Next()).Take(UniqueCards);   // Randomized de volgorde van de lijst met 32 nummers en pakt er (UniqueCards) uit
 
-            foreach (int CardNumber in RandomIntList)   //voor elk nummer(int) uit RandomIntList voert hij de onderstaande code uit (hoe vaak? --> UniqueCards) 
+            foreach (int CardNumber in RandomIntList)   // voor elk nummer(int) uit RandomIntList voert hij de onderstaande code uit (hoe vaak? --> UniqueCards) 
             {
-                string CardFace = "Images/Cards/Card" + CardNumber + ".png";
-                string CardBack = "Images/Cards/CardBack.png";
-                bool HideCard = false;
+                string CardFace = "Images/Cards/Card" + CardNumber + ".png";        // locatie en naam van de afbeeldingen voorkant kaarten
+                string CardBack = "Images/Cards/CardBack.png";                      // naam van de afbeeldingen achterkan kaarten 
+                bool HideCard = false;                                              // om aan te geven of een kaart van het bord verdwijnen moet
 
                 for (int i = 0; i < 2; i++)
                 {
