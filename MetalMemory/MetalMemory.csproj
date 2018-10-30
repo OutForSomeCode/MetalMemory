@@ -56,12 +56,19 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="GameLogic.cs" />
+    <Compile Include="HighScore.xaml.cs">
+      <DependentUpon>HighScore.xaml</DependentUpon>
+    </Compile>
     <Compile Include="InitializeCards.cs" />
     <Compile Include="PlaySounds.cs" />
     <Compile Include="SaveLoad.cs" />
     <Compile Include="UserInterface.xaml.cs">
       <DependentUpon>UserInterface.xaml</DependentUpon>
     </Compile>
+    <Page Include="HighScore.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="InitializeGame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -142,9 +149,6 @@
     <Resource Include="Images\BackgroundMenu.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\MMBG.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\start.png" />
   </ItemGroup>
   <ItemGroup>
@@ -182,6 +186,8 @@
   <ItemGroup>
     <Resource Include="Images\BackgroundUserInterface.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\BackgroundHighScore.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

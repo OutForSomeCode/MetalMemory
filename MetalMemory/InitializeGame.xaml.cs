@@ -95,6 +95,7 @@ namespace MetalMemory
 
             // Save functie aanpassen ==> als er gesaved word alle kaart Tags opslaan in GetTagDataList!!!!
             StartGame = new InitializeMemoryGrid(MemoryGrid, GridColumn, GridRows);
+            
             // load functie die lijst op de juiste plaats terug zet
             GameLogic = new GameLogic(MemoryGrid, GridColumn, GridRows);
             UserInterfaceFrame.NavigationService.Navigate(new UserInterface(Player1, Player2, MemoryGrid, GridColumn, GridRows));

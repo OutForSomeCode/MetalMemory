@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\rolan\Documents\GitHub\MetalMemory\MetalMemory\App.xaml
-5-1039892655
+6-1355354427
 
-18-664471893
+19790168892
 131569487696
-InitializeGame.xaml;LoadGame.xaml;MainMenu.xaml;MainWindow.xaml;UserInterface.xaml;
+HighScore.xaml;InitializeGame.xaml;LoadGame.xaml;MainMenu.xaml;MainWindow.xaml;UserInterface.xaml;
 
-True
+False
 
