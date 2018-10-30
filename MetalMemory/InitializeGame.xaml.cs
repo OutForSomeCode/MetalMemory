@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 namespace MetalMemory
 {
     /// <summary>
-    /// Interaction logic for InitializeGame.xaml
+    /// verzamel data benodiged voor het starten van een nieuwe game/laden van een game
     /// </summary>
     public partial class InitializeGame : Page
     {
@@ -32,8 +32,12 @@ namespace MetalMemory
         {
             InitializeComponent();            
         }
-        
-        //new game knop
+
+        /// <summary>
+        /// start nieuwe game
+        /// </summary>
+        /// <param name="sender">word niks mee gedaan</param>
+        /// <param name="e">word niks mee gedaan</param>
         private void NewGame_Click(object sender, RoutedEventArgs e)
         {
             PlaySounds SoundPlayer = new PlaySounds("ButtonClickSound.wav", "Play");
@@ -86,21 +90,18 @@ namespace MetalMemory
             }
         }
 
-        //load game knop
         /// <summary>
-        /// 
+        /// load game
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">word niks mee gedaan</param>
+        /// <param name="e">word niks mee gedaan</param>
         private void LoadGame_Click(object sender, RoutedEventArgs e)
         {
             PlaySounds SoundPlayer = new PlaySounds("ButtonClickSound.wav", "Play");
             SaveLoad.LoadSomething();
 
-            // Save functie aanpassen ==> als er gesaved word alle kaart Tags opslaan in GetTagDataList!!!!
+            // start het spel met de opgeslagen data
             StartGame = new InitializeMemoryGrid(MemoryGrid, GridColumn, GridRows);
-            
-            // load functie die lijst op de juiste plaats terug zet
             GameLogic = new GameLogic(MemoryGrid, GridColumn, GridRows);
             UserInterfaceFrame.NavigationService.Navigate(new UserInterface(Player1, Player2, MemoryGrid, GridColumn, GridRows));
         }

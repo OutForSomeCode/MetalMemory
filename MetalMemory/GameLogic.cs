@@ -12,6 +12,9 @@ using System.Windows.Input;
 
 namespace MetalMemory
 {
+    /// <summary>
+    /// regelt het spelverloop
+    /// </summary>
     class GameLogic
     {
         public static bool TurnOfPlayer1 = true;
@@ -28,11 +31,11 @@ namespace MetalMemory
         private List<int> CardCompareList = new List<int>();
 
         /// <summary>
-        /// 
+        /// maakt de meegegeven variabelen beschikbaar binnen de class, start de method(AddCardToGrid) die het grid vult en maakt een timer(word niet gestart)  
         /// </summary>
-        /// <param name="Publicgrid"></param>
-        /// <param name="column"></param>
-        /// <param name="row"></param>
+        /// <param name="Publicgrid">het aangemaakte speelbord</param>
+        /// <param name="column">aantal kolommen</param>
+        /// <param name="row">aantal rijen</param>
         public GameLogic(Grid Publicgrid, int column, int row)
         {
             Localgrid = Publicgrid;
@@ -45,6 +48,9 @@ namespace MetalMemory
             EndOfTurnTimer.Elapsed += EndOfTurnTimer_Elapsed;               // trigger als de timer afloopt
         }
 
+        /// <summary>
+        /// plaats buttons in het grid en koppel hieraan een Tag met de kaart informatie en kijkt of de kaart hidden moet zijn(ivm het laden van een game)
+        /// </summary>
         private void AddCardToGrid()   
         {
             Style CardStyle = new Style(typeof(Button));
@@ -81,7 +87,11 @@ namespace MetalMemory
             }
         }
 
-        // als er op een kaart geklikt is doe het volgende:
+        /// <summary>
+        /// als er op een kaart geklikt is draait hij die kaart om, tenzij er een timer loopt(einde van de beurt timer) 
+        /// </summary>
+        /// <param name="sender">de kaart die geklikt is</param>
+        /// <param name="e">word niks mee gedaan</param>
         private void Button_Click(object sender, RoutedEventArgs e)        
         {
             // de kaart(button) die geklikt is
@@ -101,7 +111,11 @@ namespace MetalMemory
             ChosenCards(ThisButton);
             StartEndOfTurn();
         }
- 
+        
+        /// <summary>
+        /// zet het kaart nummer de omgedraaide kaarten van deze beurt in een lijst, zodat deze vergeleken kunnen worden 
+        /// </summary>
+        /// <param name="ThisButton">kaart die geklikt is(mee gekregen uit Button_Click)</param>
         private void ChosenCards(Button ThisButton)
         {
             // haalt het kaart nummer uit de "Tag"(informatie die aan elke kaart hangt) en zet deze in de lijst vergelijk
@@ -112,6 +126,9 @@ namespace MetalMemory
             ChosenCardsList.Add(ThisButton);
         }
 
+        /// <summary>
+        /// start het einde van de beurt, start niet als er nog geen 2 kaarten zijn omgedraait
+        /// </summary>
         private void StartEndOfTurn()
         {
             // doe miks als er nog geen 2 kaarten zijn geselecteerd
@@ -122,6 +139,11 @@ namespace MetalMemory
                 EndOfTurnTimer.Enabled = true;
         }
 
+        /// <summary>
+        /// als de timer 0 bereikt vergelijkt hij de 2 gekozen kaarten, als deze gelijk zijn verbergt hij de kaarten en geeft de speler punten. anders start hij de EndOfTurn method.
+        /// </summary>
+        /// <param name="sender">word niks mee gedaan</param>
+        /// <param name="e">word niks mee gedaan</param>
         private void EndOfTurnTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
             // als de beurt afloopt en er is maar 1 kaart omgedraaid
@@ -158,7 +180,9 @@ namespace MetalMemory
             UserInterface.TimeRemaining = 31;
         }
 
-        // voegt score toe na de beurt(2 kaarten omgedraait)
+        /// <summary>
+        /// voegt score toe na de beurt(waneer er 2 kaarten zijn omgedraait)
+        /// </summary>
         private void PlayerScore()
         {
             // als speler 1 aan de beurt is
@@ -187,7 +211,9 @@ namespace MetalMemory
             ScoreMultiplier++;
         }
 
-        // einde beurt
+        /// <summary>
+        /// draait alle kaarten die zijn omgedraaid(faceup) weer terug(facedown), wisselt de beurt en reset de sore multiplier
+        /// </summary>
         private void EndOfTurn()
         {
             // draai de kaarten terug
@@ -207,7 +233,9 @@ namespace MetalMemory
             ScoreMultiplier = 1;
         }
 
-        // slaat de kaart data op
+        /// <summary>
+        /// slaat alle data van de kaarten op in een lijst zodat deze kan worden opgeslagen
+        /// </summary>
         public static void SaveDataTags()
         {
             for (int i = 0; i < Columns; i++)

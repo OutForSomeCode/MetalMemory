@@ -10,12 +10,17 @@ using System.Runtime.Serialization;
 
 namespace MetalMemory
 {
+    /// <summary>
+    /// slaat data op in memory.sav en laad deze weer terug
+    /// </summary>
     class SaveLoad
     {
         // naam van de save file
         private static string SaveFile = "SaveGames/memory.sav";
 
-        // data class met variabelen waar de data in opgeslagen word
+        /// <summary>
+        /// data class met variabelen waar de data in opgeslagen word
+        /// </summary>
         [Serializable]  // geeft aan dat deze class omgezet kan worden in een stroom van data
         public class SaveData
         {
@@ -29,6 +34,9 @@ namespace MetalMemory
             public bool SaveTurnOfPlayer1;
         }
         
+        /// <summary>
+        /// opslaan door de data in binary(10100110) in een file te streamen
+        /// </summary>
         public static void SaveSomething()
         {
             // maakt een nieuwe class aan met de indeling van "SaveData" en vult deze met de data die wij opslaan willen
@@ -51,7 +59,10 @@ namespace MetalMemory
             formatter.Serialize(stream, Save);
             stream.Close();
         }
- 
+        
+        /// <summary>
+        /// laad de data uit de memory.sav file
+        /// </summary>
         public static void LoadSomething()
         {
             IFormatter formatter = new BinaryFormatter();

@@ -16,10 +16,13 @@ using System.Windows.Shapes;
 namespace MetalMemory
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// venster waar de game in draait
     /// </summary>
     public partial class MainWindow : NavigationWindow
     {
+        /// <summary>
+        /// fullscreen modes door op F11 te drukken
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();

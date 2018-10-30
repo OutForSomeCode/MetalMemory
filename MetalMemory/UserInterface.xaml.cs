@@ -17,7 +17,7 @@ using System.Timers;
 namespace MetalMemory
 {
     /// <summary>
-    /// Interaction logic for UserInterface.xaml
+    /// userinterface tijdens de game, knoppen, spelernamen en scores
     /// </summary>
     public partial class UserInterface : Page
     {
@@ -30,6 +30,14 @@ namespace MetalMemory
         private Grid MemoryGrid;
         private Timer CountDown;
 
+        /// <summary>
+        /// maakt variablen die zijn megegeven bekent binnen de class, start de method Game_Loaded
+        /// </summary>
+        /// <param name="Player1">naam van speler 1</param>
+        /// <param name="Player2">naam van speler 2</param>
+        /// <param name="GetMemoryGrid">het gamegrid, megegeven ivm reset game knop</param>
+        /// <param name="GetGridColumn">aantal kolommen, megegeven ivm reset game knop</param>
+        /// <param name="GetGridRows">aantal rijen, megegeven ivm reset game knop</param>
         public UserInterface(string Player1, string Player2, Grid GetMemoryGrid, int GetGridColumn, int GetGridRows)
         {
             InitializeComponent();
@@ -41,6 +49,9 @@ namespace MetalMemory
             Game_Loaded();
         }
 
+        /// <summary>
+        /// start een timer die elke seconde een update uitvoert
+        /// </summary>
         private void Game_Loaded()
         {
             //PlaySounds SoundPlayer = new PlaySounds("MemoryMusic.wav", "PlayLoop");
@@ -51,6 +62,11 @@ namespace MetalMemory
             CountDown.Elapsed += Timer_Elapsed;     // trigger (elke seconde)  
         }
 
+        /// <summary>
+        /// update de tijd(aftellend), scores en eidigd de beurt als de tijd afloopt
+        /// </summary>
+        /// <param name="sender">word niks mee gedaan</param>
+        /// <param name="e">word niks mee gedaan</param>
         private void Timer_Elapsed(object sender, EventArgs e)
         {
             // highlight speler die aan de beurt is
@@ -97,7 +113,11 @@ namespace MetalMemory
             }
         }
 
-        // reset de game en haalt een nieuwe set kaarten op
+        /// <summary>
+        /// reset de game en haalt een nieuwe set kaarten op
+        /// </summary>
+        /// <param name="sender">word niks mee gedaan</param>
+        /// <param name="e">word niks mee gedaan</param>
         private void ResetGame_Click(object sender, RoutedEventArgs e)
         {
             GetCards = new InitializeCards(GridColumn, GridRows);
@@ -108,14 +128,22 @@ namespace MetalMemory
             GameLogic.ScoreOfPlayer2 = 0;
         }
 
-        // opslaan van de game
+        /// <summary>
+        /// opslaan van de game
+        /// </summary>
+        /// <param name="sender">word niks mee gedaan</param>
+        /// <param name="e">word niks mee gedaan</param>
         private void Save_Click(object sender, RoutedEventArgs e)
         {
             GameLogic.SaveDataTags();
             SaveLoad.SaveSomething();
         }
 
-        // terug naar het hoofd menu
+        /// <summary>
+        /// terug naar het hoofd menu
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainMenu_Click(object sender, RoutedEventArgs e)
         {
             CountDown.Stop();

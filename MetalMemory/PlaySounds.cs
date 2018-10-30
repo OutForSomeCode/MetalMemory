@@ -9,11 +9,19 @@ using System.Threading.Tasks;
 
 namespace MetalMemory
 {
+    /// <summary>
+    /// regelt het geluid dat word afgespeelt
+    /// </summary>
     class PlaySounds
     {
         private string FileName;
         private string PlayType;
 
+        /// <summary>
+        /// maak de megegeven variabelen bekent binnen de class, start method Play
+        /// </summary>
+        /// <param name="FileToPlay">filenaam die afgespeelt moet worden</param>
+        /// <param name="TypeToPlay">hoe hij afgespeelt moet worden</param>
         public PlaySounds(string FileToPlay, string TypeToPlay)
         {
             FileName = FileToPlay;
@@ -21,6 +29,9 @@ namespace MetalMemory
             Play();
         }
 
+        /// <summary>
+        /// gebruik soundplayer om het megegeven bestand af te spelen
+        /// </summary>
         private void Play()
         {
             string path = Assembly.GetExecutingAssembly().Location;             //kijkt waar de .exe staat

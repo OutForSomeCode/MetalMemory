@@ -73,10 +73,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="LoadGame.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -93,9 +89,6 @@
       <DependentUpon>InitializeGame.xaml</DependentUpon>
     </Compile>
     <Compile Include="InitializeMemoryGrid.cs" />
-    <Compile Include="LoadGame.xaml.cs">
-      <DependentUpon>LoadGame.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>

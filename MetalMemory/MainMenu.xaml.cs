@@ -18,17 +18,24 @@ using System.Reflection;
 namespace MetalMemory
 {
     /// <summary>
-    /// Interaction logic for MainMenu.xaml
+    /// hoofd menu
     /// </summary>
     public partial class MainMenu : Page
     {
+        /// <summary>
+        /// laad het scorebord
+        /// </summary>
         public MainMenu()
         {
             InitializeComponent();
             ScoreBoardFrame.NavigationService.Navigate(new HighScore());
         }
 
-        //start knop
+        /// <summary>
+        /// start knop
+        /// </summary>
+        /// <param name="sender">word niks mee gedaan</param>
+        /// <param name="e">word niks mee gedaan</param>
         private void Start_Click(object sender, EventArgs e)
         {
             PlaySounds SoundPlayer = new PlaySounds("ButtonClickSound.wav", "Play");        //speelt het geluid af
@@ -37,6 +44,11 @@ namespace MetalMemory
             NavigationService.Navigate(new InitializeGame());                               //navigatie
         }
 
+        /// <summary>
+        /// game afsluiten
+        /// </summary>
+        /// <param name="sender">word niks mee gedaan</param>
+        /// <param name="e">word niks mee gedaan</param>
         private void Exit_Click(object sender, MouseButtonEventArgs e)         
         {
             PlaySounds SoundPlayer = new PlaySounds("ButtonClickSound.wav", "PlaySync");    //speelt het geluid af, en pauseert de code tot het geluit klaar is met afspelen
