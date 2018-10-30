@@ -55,8 +55,7 @@ namespace MetalMemory
                 GridRows = 8;
             }
 
-
-            // check als er namen zijn ingevoert
+            // check als er namen zijn ingevoert          
             if (string.IsNullOrWhiteSpace(PlayerName_1.Text) && string.IsNullOrWhiteSpace(PlayerName_2.Text))
             {
                 MessageBox.Show("Please enter a name for both Players");
@@ -88,6 +87,11 @@ namespace MetalMemory
         }
 
         //load game knop
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LoadGame_Click(object sender, RoutedEventArgs e)
         {
             PlaySounds SoundPlayer = new PlaySounds("ButtonClickSound.wav", "Play");

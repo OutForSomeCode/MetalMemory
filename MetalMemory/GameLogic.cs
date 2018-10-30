@@ -27,6 +27,12 @@ namespace MetalMemory
         private List<Button> ChosenCardsList = new List<Button>();
         private List<int> CardCompareList = new List<int>();
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Publicgrid"></param>
+        /// <param name="column"></param>
+        /// <param name="row"></param>
         public GameLogic(Grid Publicgrid, int column, int row)
         {
             Localgrid = Publicgrid;
