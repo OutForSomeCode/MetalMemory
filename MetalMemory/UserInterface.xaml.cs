@@ -110,6 +110,7 @@ namespace MetalMemory
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
+            GameLogic.SaveDataTags();
             SaveLoad.SaveSomething();
         }
 

@@ -15,11 +15,13 @@ namespace MetalMemory
     class GameLogic
     {
         public static bool TurnOfPlayer1 = true;
-        private int ScoreMultiplier = 1;
         public static int ScoreOfPlayer1 = 0;
         public static int ScoreOfPlayer2 = 0;
-                
-        private Grid Localgrid;
+        private int ScoreMultiplier = 1;
+        private static int Columns;
+        private static int Rows;
+
+        private static Grid Localgrid;
         public static Timer EndOfTurnTimer;
         private List<InitializeCards.CardTagData> TagDataList = new List<InitializeCards.CardTagData>();
         private List<Button> ChosenCardsList = new List<Button>();
@@ -27,30 +29,31 @@ namespace MetalMemory
 
         public GameLogic(Grid Publicgrid, int column, int row)
         {
-            Localgrid = Publicgrid;                                         // vult Localgrid met Publicgrid
-            AddCardToGrid(column, row);                                     // start de method(AddCardToGrid) en geeft de int column & row mee(deze worden uit InitializeCards gehaald)
+            Localgrid = Publicgrid;
+            Columns = column;
+            Rows = row;
+            AddCardToGrid();
 
             EndOfTurnTimer = new Timer(2000);                               // nieuwe timer van 2 seconden         
             EndOfTurnTimer.AutoReset = false;                               // timer loopt maar 1 keer
             EndOfTurnTimer.Elapsed += EndOfTurnTimer_Elapsed;               // trigger als de timer afloopt
         }
 
-        private void AddCardToGrid(int columns, int rows)   
+        private void AddCardToGrid()   
         {
             Style CardStyle = new Style(typeof(Button));
             CardStyle.Setters.Add(new Setter(Button.BackgroundProperty, Brushes.Transparent));
             CardStyle.Setters.Add(new Setter(Button.BorderBrushProperty, Brushes.Transparent));
 
             TagDataList = InitializeCards.GetTagDataList;                   // maakt een lijst genaamt CardFaces en vult deze met buttons(afbeeldingen) uit GetCardList  
-            for (int i = 0; i < columns; i++)                               // loopt door de kolommen (links naar rechts)
+            for (int i = 0; i < Columns; i++)                               // loopt door de kolommen (links naar rechts)
             {
-                for (int j = 0; j < rows; j++)                              // per kolom, loopt door de rijen (boven naar onderen)
+                for (int j = 0; j < Rows; j++)                              // per kolom, loopt door de rijen (boven naar onderen)
                 {
-                    // vult het grid met buttons. aan deze buttons hangt een tag met de info voor kaartnummer, voorkant, achterkant & false/true 
                     Button Card = new Button();
                     Card.Style = CardStyle;
-                    Card.Tag = TagDataList.First();
-                    TagDataList.RemoveAt(0);                                  // verwijdert de button na het plaatsen zodat hij niet nog een keer gebruikt kan worden
+                    Card.Tag = TagDataList.First();                         // vult het grid met buttons. aan deze buttons hangt een tag met de info voor kaartnummer, voorkant, achterkant & false/true
+                    TagDataList.RemoveAt(0);                                // verwijdert de button na het plaatsen zodat hij niet nog een keer gebruikt kan worden
 
                     // haalt de info voor de achterkant uit de tag 
                     Image CardBack = new Image();
@@ -192,6 +195,24 @@ namespace MetalMemory
 
             // reset score multiplier
             ScoreMultiplier = 1;
+        }
+
+        public static void SaveDataTags()
+        {
+            for (int i = 0; i < Columns; i++)
+            {
+                for (int j = 0; j < Rows; j++)
+                {
+                    //Button Card = Localgrid.Children();
+                    int CardNumber = ((InitializeCards.CardTagData)Card.Tag).IndexNumber;
+                    ImageSource CardFace = ((InitializeCards.CardTagData)Card.Tag).SourceCardFace;
+                    ImageSource CardBack = ((InitializeCards.CardTagData)Card.Tag).SourceCardBack;
+                    bool HideCard = ((InitializeCards.CardTagData)Card.Tag).CardHidden;
+
+                    var CardTag = new InitializeCards.CardTagData(CardNumber, CardFace, CardBack, HideCard);
+                    InitializeCards.GetTagDataList.Add(CardTag);
+                }
+            }
         }
     }
 }
