@@ -18,11 +18,11 @@ namespace MetalMemory
         public class CardTagData
         {
             public int IndexNumber;
-            public ImageSource SourceCardFace;
-            public ImageSource SourceCardBack;
+            public string SourceCardFace;
+            public string SourceCardBack;
             public bool CardHidden;
 
-            public CardTagData(int CardNumber, ImageSource CardFace, ImageSource CardBack, bool HideCard)
+            public CardTagData(int CardNumber, string CardFace, string CardBack, bool HideCard)
             {
                 IndexNumber = CardNumber;
                 SourceCardFace = CardFace;
@@ -54,8 +54,8 @@ namespace MetalMemory
 
             foreach (int CardNumber in RandomIntList)   //voor elk nummer(int) uit RandomIntList voert hij de onderstaande code uit (hoe vaak? --> UniqueCards) 
             {
-                ImageSource CardFace = new BitmapImage(new Uri("Images/Cards/Card" + CardNumber + ".png", UriKind.Relative));
-                ImageSource CardBack = new BitmapImage(new Uri("Images/Cards/CardBack.png", UriKind.Relative));
+                string CardFace = "Images/Cards/Card" + CardNumber + ".png";
+                string CardBack = "Images/Cards/CardBack.png";
                 bool HideCard = false;
 
                 for (int i = 0; i < 2; i++)

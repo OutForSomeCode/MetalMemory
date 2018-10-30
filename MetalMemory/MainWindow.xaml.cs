@@ -26,7 +26,7 @@ namespace MetalMemory
             NavigationCommands.BrowseBack.InputGestures.Clear();            //ontkoppel terugfunctie
             NavigationCommands.BrowseForward.InputGestures.Clear();         //ontkopper vooruitfunctie
 
-            Topmost = true;     //game start op de voorgrond
+            Topmost = false;     //game start op de voorgrond
             PreviewKeyDown +=
                 (s, e) =>
                 {

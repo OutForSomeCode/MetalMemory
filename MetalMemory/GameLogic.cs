@@ -57,7 +57,7 @@ namespace MetalMemory
 
                     // haalt de info voor de achterkant uit de tag 
                     Image CardBack = new Image();
-                    CardBack.Source = ((InitializeCards.CardTagData)Card.Tag).SourceCardBack;
+                    CardBack.Source = new BitmapImage(new Uri(((InitializeCards.CardTagData)Card.Tag).SourceCardBack, UriKind.Relative));
                     Card.Content = CardBack;
 
                     // plaatst de kaart op het speelveld
@@ -67,6 +67,10 @@ namespace MetalMemory
 
                     // maak de kaarten klikbaar
                     Card.Click += new RoutedEventHandler(Button_Click);
+
+                    // verbergt de kaarten die al zijn gespeelt bij het laden
+                    if (((InitializeCards.CardTagData)Card.Tag).CardHidden == true)
+                        Card.Visibility = Visibility.Hidden;
                 }
             }
         }
@@ -85,7 +89,7 @@ namespace MetalMemory
 
             // draai de kaart om
             Image CardFace = new Image();
-            CardFace.Source = ((InitializeCards.CardTagData)ThisButton.Tag).SourceCardFace;
+            CardFace.Source = new BitmapImage(new Uri(((InitializeCards.CardTagData)ThisButton.Tag).SourceCardFace, UriKind.Relative));
             ThisButton.Content = CardFace;
   
             ChosenCards(ThisButton);
@@ -186,7 +190,7 @@ namespace MetalMemory
                 Application.Current.Dispatcher.Invoke((Action)delegate
                 {
                     Image CardBack = new Image();
-                    CardBack.Source = ((InitializeCards.CardTagData)Card.Tag).SourceCardBack;
+                    CardBack.Source = new BitmapImage(new Uri(((InitializeCards.CardTagData)Card.Tag).SourceCardBack, UriKind.Relative));
                     Card.Content = CardBack;
                 });
             }
@@ -203,10 +207,11 @@ namespace MetalMemory
             {
                 for (int j = 0; j < Rows; j++)
                 {
-                    //Button Card = Localgrid.Children();
+                    Button Card = Localgrid.Children.Cast<Button>()
+                        .First(e => Grid.GetRow(e) == j && Grid.GetColumn(e) == i);
                     int CardNumber = ((InitializeCards.CardTagData)Card.Tag).IndexNumber;
-                    ImageSource CardFace = ((InitializeCards.CardTagData)Card.Tag).SourceCardFace;
-                    ImageSource CardBack = ((InitializeCards.CardTagData)Card.Tag).SourceCardBack;
+                    string CardFace = ((InitializeCards.CardTagData)Card.Tag).SourceCardFace;
+                    string CardBack = ((InitializeCards.CardTagData)Card.Tag).SourceCardBack;
                     bool HideCard = ((InitializeCards.CardTagData)Card.Tag).CardHidden;
 
                     var CardTag = new InitializeCards.CardTagData(CardNumber, CardFace, CardBack, HideCard);
