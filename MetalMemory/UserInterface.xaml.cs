@@ -120,6 +120,7 @@ namespace MetalMemory
         /// <param name="e">word niks mee gedaan</param>
         private void ResetGame_Click(object sender, RoutedEventArgs e)
         {
+            PlaySounds SoundPlayer = new PlaySounds("ButtonClickSound.wav", "Play");
             GetCards = new InitializeCards(GridColumn, GridRows);
             StartGameLogic = new GameLogic(MemoryGrid, GridColumn, GridRows);
             CountDownTimer.Foreground = new SolidColorBrush(Colors.White);
@@ -137,6 +138,8 @@ namespace MetalMemory
         {
             GameLogic.SaveDataTags();
             SaveLoad.SaveSomething();
+            PlaySounds SoundPlayer = new PlaySounds("ButtonClickSound.wav", "Play");
+            MessageBox.Show("Saved");
         }
 
         /// <summary>
@@ -146,6 +149,7 @@ namespace MetalMemory
         /// <param name="e"></param>
         private void MainMenu_Click(object sender, RoutedEventArgs e)
         {
+            PlaySounds SoundPlayer = new PlaySounds("ButtonClickSound.wav", "Play");
             CountDown.Stop();
             TimeRemaining = 31;            
         }
