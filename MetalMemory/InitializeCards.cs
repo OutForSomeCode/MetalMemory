@@ -53,7 +53,7 @@ namespace MetalMemory
         /// <param name="row">aantal rijen</param>
         public InitializeCards(int column, int row)     // geeft de grid naam, aantal kolommen & rijen mee
         {
-            TotalCards = column * row;                  // Berekend het aantal kaarten
+            TotalCards = column * row;                  // Berekent het aantal kaarten
             UniqueCards = TotalCards / 2;               // geeft aan hoeveel unieke kaarten er zijn
             FillButtonsList();                          // start de method(FillImages)
             GetTagDataList = ButtonTag.OrderBy(y => RandomNumberGenerator.Next()).ToList();  // Randomized de volgorde van de lijst met afbeeldingen en zet deze in GetImageList
