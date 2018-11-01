@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace MetalMemory
 {
     /// <summary>
@@ -29,6 +30,14 @@ namespace MetalMemory
         public HighScore()
         {
             InitializeComponent();
+            var strlist = highscores.Keys.ToList();
+            var intlist = highscores.Values.ToList();
+
+            for (int i = 0; i < strlist.Count && i < 7; i++)
+            {
+                TextBlock tb = (this.FindName(string.Format("Score_{0}", i)) as TextBlock);
+                tb.Text = strlist[i] + ": " + intlist[i];
+            }
         }
 
         public static void HighscoreList()
@@ -47,7 +56,8 @@ namespace MetalMemory
             {
                 highscores.Add(naam2, score2);
             }
-
+            
         }
+        
     }
 }
