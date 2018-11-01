@@ -20,15 +20,34 @@ namespace MetalMemory
     /// </summary>
     public partial class HighScore : Page
     {
-        // dit zijn de aankoppelpunten voor de benodigde data
-        //GameLogic.ScoreOfPlayer1;         score speler 1
-        //GameLogic.ScoreOfPlayer2;         score speler 2
-        //InitializeGame.Player1;           naam speler 1
-        //InitializeGame.Player2;           naam speler 2
+        private static int score1 = GameLogic.ScoreOfPlayer1;
+        private static int score2 = GameLogic.ScoreOfPlayer2;
+        private static string naam1 = InitializeGame.Player1;
+        private static string naam2 = InitializeGame.Player2;
+        private static Dictionary<string, int> highscores = new Dictionary<string, int>();
 
         public HighScore()
         {
             InitializeComponent();
+        }
+
+        public static void HighscoreList()
+        {
+
+            if (score1 == score2)
+            {
+                highscores.Add(naam1, score1);
+                highscores.Add(naam2, score2);
+            }
+            else if (score1 > score2)
+            {
+                highscores.Add(naam1, score1);
+            }
+            else
+            {
+                highscores.Add(naam2, score2);
+            }
+
         }
     }
 }

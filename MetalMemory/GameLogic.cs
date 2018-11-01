@@ -21,6 +21,8 @@ namespace MetalMemory
         public static int ScoreOfPlayer1 = 0;
         public static int ScoreOfPlayer2 = 0;
         private int ScoreMultiplier = 1;
+        private int EndOfGameCount = 0;
+        private int TotalCards;
         private static int Columns;
         private static int Rows;
 
@@ -41,6 +43,7 @@ namespace MetalMemory
             Localgrid = Publicgrid;
             Columns = column;
             Rows = row;
+            TotalCards = column * row;
             AddCardToGrid();
 
             EndOfTurnTimer = new Timer(2000);                               // nieuwe timer van 2 seconden         
@@ -168,6 +171,7 @@ namespace MetalMemory
                     });
                 }
                 PlayerScore();
+                EndOfGameCount += 2;
             }
 
             // als de kaarten NIET gelijk zijn
@@ -261,6 +265,14 @@ namespace MetalMemory
                     var CardTag = new InitializeCards.CardTagData(CardNumber, CardFace, CardBack, HideCard, FaceUp);
                     InitializeCards.GetTagDataList.Add(CardTag);
                 }
+            }
+        }
+
+        private void EndOfGame()
+        {
+            if (EndOfGameCount == TotalCards)
+            {
+                HighScore.HighscoreList();
             }
         }
     }
