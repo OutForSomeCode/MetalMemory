@@ -17,6 +17,7 @@ namespace MetalMemory
     {
         // naam van de save file
         private static string SaveFile = "SaveGames/memory.sav";
+        private static string SaveHighscore = "SaveGames/highscore.sav";
 
         /// <summary>
         /// data class met variabelen waar de data in opgeslagen word
@@ -33,7 +34,13 @@ namespace MetalMemory
             public int SaveGridRows;
             public bool SaveTurnOfPlayer1;
         }
-        
+
+        [Serializable]
+        public class SaveHighscoreData
+        {
+            public Dictionary<string, int> SaveHighscoreDictionary;
+        }
+
         /// <summary>
         /// opslaan door de data in binary(10100110) in een file te streamen
         /// </summary>
@@ -59,7 +66,20 @@ namespace MetalMemory
             formatter.Serialize(stream, Save);
             stream.Close();
         }
-        
+
+        public static void SaveHighscores()
+        {
+            SaveHighscoreData Save = new SaveHighscoreData();
+
+            Save.SaveHighscoreDictionary = HighScore.highscores;
+
+            IFormatter formatter = new BinaryFormatter();
+            Stream stream = new FileStream(SaveHighscore, FileMode.Create, FileAccess.Write);
+
+            formatter.Serialize(stream, Save);
+            stream.Close();
+        }
+
         /// <summary>
         /// laad de data uit de memory.sav file
         /// </summary>
@@ -81,6 +101,18 @@ namespace MetalMemory
             InitializeGame.GridColumn = Load.SaveGridColumn;
             InitializeGame.GridRows = Load.SaveGridRows;
             GameLogic.TurnOfPlayer1 = Load.SaveTurnOfPlayer1;
-        } 
+        }
+
+        public static void LoadHighscores()
+        {
+            IFormatter formatter = new BinaryFormatter();
+            Stream stream = new FileStream(SaveHighscore, FileMode.Open, FileAccess.Read);
+
+            // maakt een nieuwe class aan met de indeling van "SaveData" en vult deze met de data uit onze save file "memory.sav"
+            SaveHighscoreData Load = (SaveHighscoreData)formatter.Deserialize(stream);
+            stream.Close();
+
+            HighScore.highscores = Load.SaveHighscoreDictionary;
+        }
     }
 }

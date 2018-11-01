@@ -24,7 +24,7 @@ namespace MetalMemory
         private static int score2 = GameLogic.ScoreOfPlayer2;
         private static string naam1 = InitializeGame.Player1;
         private static string naam2 = InitializeGame.Player2;
-        private static Dictionary<string, int> highscores = new Dictionary<string, int>();
+        public static Dictionary<string, int> highscores = new Dictionary<string, int>();
 
         public HighScore()
         {
