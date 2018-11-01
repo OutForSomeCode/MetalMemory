@@ -97,6 +97,9 @@ namespace MetalMemory
             // de kaart(button) die geklikt is
             Button ThisButton = sender as Button;
 
+            // als de kaart die geklikt is niet een achterkant weergeeft, word er niks mee gedaan (voorkomt dat je 2x de zelfde kaart kan klikken)
+            if (((InitializeCards.CardTagData)ThisButton.Tag).CardFaceUp == true) return;
+
             // als einde van de beurt al gestart is kun je geen kaarten meer omdraaien
             if (EndOfTurnTimer.Enabled) return;
 
@@ -107,7 +110,8 @@ namespace MetalMemory
             Image CardFace = new Image();
             CardFace.Source = new BitmapImage(new Uri(((InitializeCards.CardTagData)ThisButton.Tag).SourceCardFace, UriKind.Relative));
             ThisButton.Content = CardFace;
-  
+            ((InitializeCards.CardTagData)ThisButton.Tag).CardFaceUp = true;
+
             ChosenCards(ThisButton);
             StartEndOfTurn();
         }
@@ -224,6 +228,7 @@ namespace MetalMemory
                     Image CardBack = new Image();
                     CardBack.Source = new BitmapImage(new Uri(((InitializeCards.CardTagData)Card.Tag).SourceCardBack, UriKind.Relative));
                     Card.Content = CardBack;
+                    ((InitializeCards.CardTagData)Card.Tag).CardFaceUp = false;
                 });
             }
             // beurt wisselen
@@ -250,9 +255,10 @@ namespace MetalMemory
                     string CardFace = ((InitializeCards.CardTagData)Card.Tag).SourceCardFace;
                     string CardBack = ((InitializeCards.CardTagData)Card.Tag).SourceCardBack;
                     bool HideCard = ((InitializeCards.CardTagData)Card.Tag).CardHidden;
+                    bool FaceUp = ((InitializeCards.CardTagData)Card.Tag).CardFaceUp;
 
                     // zet de tag data in de lijst die opgelagen word 
-                    var CardTag = new InitializeCards.CardTagData(CardNumber, CardFace, CardBack, HideCard);
+                    var CardTag = new InitializeCards.CardTagData(CardNumber, CardFace, CardBack, HideCard, FaceUp);
                     InitializeCards.GetTagDataList.Add(CardTag);
                 }
             }

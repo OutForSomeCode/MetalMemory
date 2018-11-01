@@ -27,13 +27,15 @@ namespace MetalMemory
             public string SourceCardFace;
             public string SourceCardBack;
             public bool CardHidden;
+            public bool CardFaceUp;
 
-            public CardTagData(int CardNumber, string CardFace, string CardBack, bool HideCard)
+            public CardTagData(int CardNumber, string CardFace, string CardBack, bool HideCard, bool FaceUp)
             {
                 IndexNumber = CardNumber;
                 SourceCardFace = CardFace;
                 SourceCardBack = CardBack;
                 CardHidden = HideCard;
+                CardFaceUp = FaceUp;
             }
         }
 
@@ -71,10 +73,11 @@ namespace MetalMemory
                 string CardFace = "Images/Cards/Card" + CardNumber + ".png";        // locatie en naam van de afbeeldingen voorkant kaarten
                 string CardBack = "Images/Cards/CardBack.png";                      // naam van de afbeeldingen achterkan kaarten 
                 bool HideCard = false;                                              // om aan te geven of een kaart van het bord verdwijnen moet
+                bool FaceUp = false;
 
                 for (int i = 0; i < 2; i++)
                 {
-                    var CardTag = new CardTagData(CardNumber, CardFace, CardBack, HideCard);
+                    var CardTag = new CardTagData(CardNumber, CardFace, CardBack, HideCard, FaceUp);
                     ButtonTag.Add(CardTag);
                 }
             }

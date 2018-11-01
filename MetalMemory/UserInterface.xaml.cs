@@ -59,7 +59,9 @@ namespace MetalMemory
             CountDown = new Timer(1000);            // nieuwe timer van 1 seconde         
             CountDown.AutoReset = true;             // timer blijft loopen
             CountDown.Start();                      // start de timer
-            CountDown.Elapsed += Timer_Elapsed;     // trigger (elke seconde)  
+            CountDown.Elapsed += Timer_Elapsed;     // trigger (elke seconde)
+            ScreenScorePlayer1.Text = "Score: " + GameLogic.ScoreOfPlayer1.ToString();
+            ScreenScorePlayer2.Text = "Score: " + GameLogic.ScoreOfPlayer2.ToString();
         }
 
         /// <summary>
