@@ -60,7 +60,8 @@ namespace MetalMemory
             CountDown.AutoReset = true;             // timer blijft loopen
             CountDown.Start();                      // start de timer
             CountDown.Elapsed += Timer_Elapsed;     // trigger (elke seconde)
-            ScreenScorePlayer1.Text = "Score: " + GameLogic.ScoreOfPlayer1.ToString();
+
+            ScreenScorePlayer1.Text = "Score: " + GameLogic.ScoreOfPlayer1.ToString();      // laat de score op het scherm zien
             ScreenScorePlayer2.Text = "Score: " + GameLogic.ScoreOfPlayer2.ToString();
         }
 
@@ -123,11 +124,11 @@ namespace MetalMemory
         private void ResetGame_Click(object sender, RoutedEventArgs e)
         {
             PlaySounds SoundPlayer = new PlaySounds("ButtonClickSound.wav", "Play");
-            GetCards = new InitializeCards(GridColumn, GridRows);
-            StartGameLogic = new GameLogic(MemoryGrid, GridColumn, GridRows);
-            CountDownTimer.Foreground = new SolidColorBrush(Colors.White);
-            TimeRemaining = 31; 
-            GameLogic.ScoreOfPlayer1 = 0;
+            GetCards = new InitializeCards(GridColumn, GridRows);                       // haalt een nieuwe set kaarten op
+            StartGameLogic = new GameLogic(MemoryGrid, GridColumn, GridRows);           // start de game logic opnieuw
+            CountDownTimer.Foreground = new SolidColorBrush(Colors.White);              // set de timer kleur weer op wit
+            TimeRemaining = 31;                                                         // reset de tijd op het scherm
+            GameLogic.ScoreOfPlayer1 = 0;                                               // reset de scores
             GameLogic.ScoreOfPlayer2 = 0;
         }
 
@@ -152,8 +153,8 @@ namespace MetalMemory
         private void MainMenu_Click(object sender, RoutedEventArgs e)
         {
             PlaySounds SoundPlayer = new PlaySounds("ButtonClickSound.wav", "Play");
-            CountDown.Stop();
-            TimeRemaining = 31;            
+            CountDown.Stop();               // stopt de timer als de game gestopt word
+            TimeRemaining = 31;             // reset de tijd voor de volgende game
         }
     }
 }
