@@ -16,17 +16,20 @@ using System.Windows.Shapes;
 namespace MetalMemory
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// venster waar de game in draait
     /// </summary>
     public partial class MainWindow : NavigationWindow
     {
+        /// <summary>
+        /// fullscreen modes door op F11 te drukken
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
             NavigationCommands.BrowseBack.InputGestures.Clear();            //ontkoppel terugfunctie
             NavigationCommands.BrowseForward.InputGestures.Clear();         //ontkopper vooruitfunctie
 
-            Topmost = true;     //game start op de voorgrond
+            // kijkt of er toetsen worden ingedrukt
             PreviewKeyDown +=
                 (s, e) =>
                 {

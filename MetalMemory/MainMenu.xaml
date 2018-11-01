@@ -63,8 +63,8 @@
                 </Image.RenderTransform>
             </Image>
         </Grid>
-        <Grid x:Name="ScoreBoardGrid">
-
-        </Grid>
+        <Grid Panel.ZIndex="1000" Grid.Column="0">
+            <Frame x:Name="ScoreBoardFrame"></Frame>
+        </Grid>       
     </Grid>
 </Page>

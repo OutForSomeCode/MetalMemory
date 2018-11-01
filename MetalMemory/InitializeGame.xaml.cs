@@ -16,14 +16,14 @@ using System.Windows.Shapes;
 namespace MetalMemory
 {
     /// <summary>
-    /// Interaction logic for InitializeGame.xaml
+    /// verzamel data benodiged voor het starten van een nieuwe game/laden van een game
     /// </summary>
     public partial class InitializeGame : Page
     {
-        private string Player1;
-        private string Player2;
-        private int GridColumn;
-        private int GridRows;
+        public static string Player1;
+        public static string Player2;
+        public static int GridColumn;
+        public static int GridRows;
         InitializeMemoryGrid StartGame;
         InitializeCards GetCards;
         GameLogic GameLogic;
@@ -32,10 +32,16 @@ namespace MetalMemory
         {
             InitializeComponent();            
         }
-        
-        //new game knop
+
+        /// <summary>
+        /// start nieuwe game
+        /// </summary>
+        /// <param name="sender">word niks mee gedaan</param>
+        /// <param name="e">word niks mee gedaan</param>
         private void NewGame_Click(object sender, RoutedEventArgs e)
         {
+            PlaySounds SoundPlayer = new PlaySounds("ButtonClickSound.wav", "Play");
+
             //kijkt welke hoeveelheid kaarten gekozen is --> geeft aan hoeveel kolommen en rijen daarvoor nodig zijn
             if (Cards16.IsChecked == true)
             {
@@ -53,21 +59,51 @@ namespace MetalMemory
                 GridRows = 8;
             }
 
-            //start de verschillende game onderdelen(geeft variabelen mee om in de class te gebruiken)
-            StartGame = new InitializeMemoryGrid(MemoryGrid, GridColumn, GridRows);
-            GetCards = new InitializeCards(GridColumn, GridRows);
-            GameLogic = new GameLogic(MemoryGrid, GridColumn, GridRows);
+            // check als er namen zijn ingevoert          
+            if (string.IsNullOrWhiteSpace(PlayerName_1.Text) && string.IsNullOrWhiteSpace(PlayerName_2.Text))
+            {
+                MessageBox.Show("Please enter a name for both Players");
+                PlayerName_1.Clear();
+                PlayerName_2.Clear();
+            }
+            else if (string.IsNullOrWhiteSpace(PlayerName_1.Text))
+            {
+                MessageBox.Show("Please enter a name for Player 1");
+                PlayerName_1.Clear();
+            }
+            else if (string.IsNullOrWhiteSpace(PlayerName_2.Text))
+            {
+                MessageBox.Show("Please enter a name for Player 2");
+                PlayerName_2.Clear();
+            }
+            else
+            {
+                //start de verschillende game onderdelen(geeft variabelen mee om in de class te gebruiken)
+                StartGame = new InitializeMemoryGrid(MemoryGrid, GridColumn, GridRows);
+                GetCards = new InitializeCards(GridColumn, GridRows);
+                GameLogic = new GameLogic(MemoryGrid, GridColumn, GridRows);
 
-            //Userinterface --> playernames, gridsize(nodig voor reset)
-            Player1 = PlayerName_1.Text;
-            Player2 = PlayerName_2.Text;
-            UserInterfaceFrame.NavigationService.Navigate(new UserInterface(Player1, Player2, MemoryGrid, GridColumn, GridRows));
+                //Userinterface --> playernames, gridsize(nodig voor reset)
+                Player1 = PlayerName_1.Text;
+                Player2 = PlayerName_2.Text;
+                UserInterfaceFrame.NavigationService.Navigate(new UserInterface(Player1, Player2, MemoryGrid, GridColumn, GridRows));
+            }
         }
 
-        //load game knop
+        /// <summary>
+        /// load game
+        /// </summary>
+        /// <param name="sender">word niks mee gedaan</param>
+        /// <param name="e">word niks mee gedaan</param>
         private void LoadGame_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new LoadGame());
+            PlaySounds SoundPlayer = new PlaySounds("ButtonClickSound.wav", "Play");
+            SaveLoad.LoadSomething();
+
+            // start het spel met de opgeslagen data
+            StartGame = new InitializeMemoryGrid(MemoryGrid, GridColumn, GridRows);
+            GameLogic = new GameLogic(MemoryGrid, GridColumn, GridRows);
+            UserInterfaceFrame.NavigationService.Navigate(new UserInterface(Player1, Player2, MemoryGrid, GridColumn, GridRows));
         }
     }
 }

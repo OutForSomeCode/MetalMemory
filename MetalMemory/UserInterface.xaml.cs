@@ -17,45 +17,79 @@ using System.Timers;
 namespace MetalMemory
 {
     /// <summary>
-    /// Interaction logic for UserInterface.xaml
+    /// userinterface tijdens de game, knoppen, spelernamen en scores
     /// </summary>
     public partial class UserInterface : Page
     {
         InitializeCards GetCards;
-        GameLogic GameLogic;
+        GameLogic StartGameLogic;
 
-        private int TimeRemaining = 30;             //geeft aan hoeveel tijd er nog over is
+        public static int TimeRemaining = 30;       //geeft aan hoeveel tijd er nog over is
         private int GridColumn;
         private int GridRows;
         private Grid MemoryGrid;
+        private Timer CountDown;
 
-        public bool TurnOfPlayer1 = true;           //geeft aan wie er aan de beurt is
-        public bool TurnOfPlayer2 = false;
-
+        /// <summary>
+        /// maakt variablen die zijn megegeven bekent binnen de class, start de method Game_Loaded
+        /// </summary>
+        /// <param name="Player1">naam van speler 1</param>
+        /// <param name="Player2">naam van speler 2</param>
+        /// <param name="GetMemoryGrid">het gamegrid, megegeven ivm reset game knop</param>
+        /// <param name="GetGridColumn">aantal kolommen, megegeven ivm reset game knop</param>
+        /// <param name="GetGridRows">aantal rijen, megegeven ivm reset game knop</param>
         public UserInterface(string Player1, string Player2, Grid GetMemoryGrid, int GetGridColumn, int GetGridRows)
         {
             InitializeComponent();
-            WindowPlayer1.Text = Player1;
-            WindowPlayer2.Text = Player2;
+            ScreenNamePlayer1.Text = Player1;
+            ScreenNamePlayer2.Text = Player2;
             GridColumn = GetGridColumn;
             GridRows = GetGridRows;
             MemoryGrid = GetMemoryGrid;
             Game_Loaded();
         }
 
+        /// <summary>
+        /// start een timer die elke seconde een update uitvoert
+        /// </summary>
         private void Game_Loaded()
         {
-            Timer CountDown = new Timer(1000);      //nieuwe timer van 1 seconde         
-            CountDown.Elapsed += Timer_Elapsed;     //trigger (elke seconde) 
-            CountDown.AutoReset = true;             //timer blijft loopen
-            CountDown.Start();                      //start de timer
+            //PlaySounds SoundPlayer = new PlaySounds("MemoryMusic.wav", "PlayLoop");
+
+            CountDown = new Timer(1000);            // nieuwe timer van 1 seconde         
+            CountDown.AutoReset = true;             // timer blijft loopen
+            CountDown.Start();                      // start de timer
+            CountDown.Elapsed += Timer_Elapsed;     // trigger (elke seconde)  
         }
 
+        /// <summary>
+        /// update de tijd(aftellend), scores en eidigd de beurt als de tijd afloopt
+        /// </summary>
+        /// <param name="sender">word niks mee gedaan</param>
+        /// <param name="e">word niks mee gedaan</param>
         private void Timer_Elapsed(object sender, EventArgs e)
         {
-            TimeRemaining--;        //-1 elke seconde
-            Dispatcher.Invoke(new Action(() => CountDownTimer.Text = string.Format("{0}:{1}", TimeRemaining / 60, TimeRemaining % 60)));    //toont timer op het scherm             
+            // highlight speler die aan de beurt is
+            if (GameLogic.TurnOfPlayer1 == true)
+            {
+                Dispatcher.Invoke(new Action(() => ScreenNamePlayer1.Foreground = new SolidColorBrush(Colors.Green)));
+                Dispatcher.Invoke(new Action(() => ScreenNamePlayer2.Foreground = new SolidColorBrush(Colors.Red)));
+            }
+            else
+            {
+                Dispatcher.Invoke(new Action(() => ScreenNamePlayer2.Foreground = new SolidColorBrush(Colors.Green)));
+                Dispatcher.Invoke(new Action(() => ScreenNamePlayer1.Foreground = new SolidColorBrush(Colors.Red)));
+            }
 
+            // update speler scores
+            Dispatcher.Invoke(new Action(() => ScreenScorePlayer1.Text = "Score: " + GameLogic.ScoreOfPlayer1.ToString()));
+            Dispatcher.Invoke(new Action(() => ScreenScorePlayer2.Text = "Score: " + GameLogic.ScoreOfPlayer2.ToString()));
+
+            // toont timer op het scherm
+            TimeRemaining--;
+            Dispatcher.Invoke(new Action(() => CountDownTimer.Text = string.Format("{0}:{1}", TimeRemaining / 60, TimeRemaining % 60)));             
+
+            // timer knippert rood laatste 5 seconden
             if (TimeRemaining <= 5)
             {
                 if (TimeRemaining % 2 == 1)
@@ -64,23 +98,60 @@ namespace MetalMemory
                 else
                     Dispatcher.Invoke(new Action(() => CountDownTimer.Foreground = new SolidColorBrush(Colors.White)));
             }
-            
 
-            if (TimeRemaining == 0)     //als timer 0 bereikt
+            // als timer 2 bereikt, start method die ook de kaartcheck doet
+            if (TimeRemaining == 2)
             {
-                TurnOfPlayer1 = !TurnOfPlayer1;     //wissel van beurt
-                //Dispatcher.Invoke(new Action(() => WindowPlayer1.Text = TurnOfPlayer1.ToString())); //test, aanpassen
-                TurnOfPlayer2 = !TurnOfPlayer2;     //wissel van beurt
-                //Dispatcher.Invoke(new Action(() => WindowPlayer2.Text = TurnOfPlayer2.ToString())); //test, aanpassen
-                TimeRemaining = 31;     //set timer weer op 30 seconden
+                GameLogic.EndOfTurnTimer.Enabled = true;
+            }
+
+            // als timer 0 bereikt, zet de timer weer op 30 seconden (+1 ivm updaten)
+            if (TimeRemaining == 0)     
+            {
+                Dispatcher.Invoke(new Action(() => CountDownTimer.Foreground = new SolidColorBrush(Colors.White)));
+                TimeRemaining = 31;
             }
         }
 
+        /// <summary>
+        /// reset de game en haalt een nieuwe set kaarten op
+        /// </summary>
+        /// <param name="sender">word niks mee gedaan</param>
+        /// <param name="e">word niks mee gedaan</param>
         private void ResetGame_Click(object sender, RoutedEventArgs e)
         {
+            PlaySounds SoundPlayer = new PlaySounds("ButtonClickSound.wav", "Play");
             GetCards = new InitializeCards(GridColumn, GridRows);
-            GameLogic = new GameLogic(MemoryGrid, GridColumn, GridRows);
-            TimeRemaining = 31;
+            StartGameLogic = new GameLogic(MemoryGrid, GridColumn, GridRows);
+            CountDownTimer.Foreground = new SolidColorBrush(Colors.White);
+            TimeRemaining = 31; 
+            GameLogic.ScoreOfPlayer1 = 0;
+            GameLogic.ScoreOfPlayer2 = 0;
+        }
+
+        /// <summary>
+        /// opslaan van de game
+        /// </summary>
+        /// <param name="sender">word niks mee gedaan</param>
+        /// <param name="e">word niks mee gedaan</param>
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+            GameLogic.SaveDataTags();
+            SaveLoad.SaveSomething();
+            PlaySounds SoundPlayer = new PlaySounds("ButtonClickSound.wav", "Play");
+            MessageBox.Show("Saved");
+        }
+
+        /// <summary>
+        /// terug naar het hoofd menu
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MainMenu_Click(object sender, RoutedEventArgs e)
+        {
+            PlaySounds SoundPlayer = new PlaySounds("ButtonClickSound.wav", "Play");
+            CountDown.Stop();
+            TimeRemaining = 31;            
         }
     }
 }

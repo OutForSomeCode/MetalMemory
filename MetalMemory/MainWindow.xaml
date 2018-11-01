@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MetalMemory"
         mc:Ignorable="d"
-        Title="MainWindow" Height="720" Width="1280" Source="MainMenu.xaml"
-        ShowsNavigationUI="true">
+        Title="Metalmemory" Height="720" Width="1280" Source="MainMenu.xaml"
+        ShowsNavigationUI="false">
     <NavigationWindow.Background>
         <ImageBrush ImageSource="Images/BackgroundMenu.png"/>
     </NavigationWindow.Background>
