@@ -29,6 +29,7 @@ namespace MetalMemory
         {
             InitializeComponent();
             ScoreBoardFrame.NavigationService.Navigate(new HighScore());
+            SaveLoad.LoadHighscores();                                              // laad de highscores
         }
 
         /// <summary>

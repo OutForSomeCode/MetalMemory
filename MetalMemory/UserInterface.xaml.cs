@@ -155,6 +155,7 @@ namespace MetalMemory
             PlaySounds SoundPlayer = new PlaySounds("ButtonClickSound.wav", "Play");
             CountDown.Stop();               // stopt de timer als de game gestopt word
             TimeRemaining = 31;             // reset de tijd voor de volgende game
+            // HighScore.UpdateHighscore();
         }
     }
 }

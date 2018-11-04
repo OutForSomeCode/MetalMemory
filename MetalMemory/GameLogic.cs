@@ -172,6 +172,11 @@ namespace MetalMemory
                 }
                 PlayerScore();
                 EndOfGameCount += 2;
+
+                if (EndOfGameCount == TotalCards)
+                {
+                    EndOfGame();
+                }
             }
 
             // als de kaarten NIET gelijk zijn
@@ -273,11 +278,8 @@ namespace MetalMemory
         /// </summary>
         private void EndOfGame()
         {
-            if (EndOfGameCount == TotalCards)
-            {
-                HighScore.HighscoreList();
-                SaveLoad.SaveHighscores();
-            }
+            // HighScore.HighscoreList();
+            SaveLoad.SaveHighscores();
         }
     }
 }

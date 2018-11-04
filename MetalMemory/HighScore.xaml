@@ -17,21 +17,30 @@
             <ColumnDefinition Width="4*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Column="1">
+        <Grid Grid.Column="1" x:Name="scoreboard">
             <Grid.RowDefinitions>
-                <RowDefinition Height="3*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="3*"/>
+                <RowDefinition Height="135*"/>
+                <RowDefinition Height="52*"/>
+                <RowDefinition Height="38*"/>
+                <RowDefinition Height="45*"/>
+                <RowDefinition Height="45*"/>
+                <RowDefinition Height="45*"/>
+                <RowDefinition Height="45*"/>
+                <RowDefinition Height="45*"/>
+                <RowDefinition Height="45*"/>
+                <RowDefinition Height="45*"/>
+                <RowDefinition Height="45*"/>
+                <RowDefinition Height="135*" />
             </Grid.RowDefinitions>
+            <TextBlock FontSize="38" Foreground="SandyBrown" HorizontalAlignment="Center" VerticalAlignment="Center" Height="54" Text="Highscores" Margin="89,132,89,1" Grid.RowSpan="2" Width="195" />
+            <TextBlock x:Name="Score_0" Grid.Row="2" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="HotPink" Text="" Height="40"></TextBlock>
+            <TextBlock x:Name="Score_1" Grid.Row="3" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="HotPink" Text="" Height="40"></TextBlock>
+            <TextBlock x:Name="Score_2" Grid.Row="4" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="HotPink" Text="" Height="40"></TextBlock>
+            <TextBlock x:Name="Score_3" Grid.Row="5" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="HotPink" Text="" Height="40"></TextBlock>
+            <TextBlock x:Name="Score_4" Grid.Row="6" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="HotPink" Text="" Height="40"></TextBlock>
+            <TextBlock x:Name="Score_5" Grid.Row="7" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="HotPink" Text="" Height="40"></TextBlock>
+            <TextBlock x:Name="Score_6" Grid.Row="8" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="HotPink" Text="" Height="40"></TextBlock>
+            <TextBlock x:Name="Score_7" Grid.Row="9" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="HotPink" Text="" Height="40"></TextBlock>
         </Grid>
     </Grid>
 </Page>

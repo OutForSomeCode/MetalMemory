@@ -26,7 +26,6 @@ namespace MetalMemory
         public MainWindow()
         {
             InitializeComponent();
-            SaveLoad.LoadHighscores();                                      // laad de highscores
 
             NavigationCommands.BrowseBack.InputGestures.Clear();            // ontkoppel terugfunctie
             NavigationCommands.BrowseForward.InputGestures.Clear();         // ontkopper vooruitfunctie
