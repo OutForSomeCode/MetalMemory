@@ -268,11 +268,15 @@ namespace MetalMemory
             }
         }
 
+        /// <summary>
+        /// als de game voorbij is laat hij de winnaar zien en voegd deze toe aan de highscore lijst
+        /// </summary>
         private void EndOfGame()
         {
             if (EndOfGameCount == TotalCards)
             {
                 HighScore.HighscoreList();
+                SaveLoad.SaveHighscores();
             }
         }
     }

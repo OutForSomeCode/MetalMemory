@@ -26,8 +26,10 @@ namespace MetalMemory
         public MainWindow()
         {
             InitializeComponent();
-            NavigationCommands.BrowseBack.InputGestures.Clear();            //ontkoppel terugfunctie
-            NavigationCommands.BrowseForward.InputGestures.Clear();         //ontkopper vooruitfunctie
+            SaveLoad.LoadHighscores();                                      // laad de highscores
+
+            NavigationCommands.BrowseBack.InputGestures.Clear();            // ontkoppel terugfunctie
+            NavigationCommands.BrowseForward.InputGestures.Clear();         // ontkopper vooruitfunctie
 
             // kijkt of er toetsen worden ingedrukt
             PreviewKeyDown +=
@@ -35,9 +37,9 @@ namespace MetalMemory
                 {
                     if (e.Key == Key.F11)
                     {
-                        if (WindowStyle != WindowStyle.SingleBorderWindow)      //checked of de game fullscreen staat
+                        if (WindowStyle != WindowStyle.SingleBorderWindow)      // checked of de game fullscreen staat
                         {
-                            ResizeMode = ResizeMode.CanResize;                  //haalt de game uit fullscreen
+                            ResizeMode = ResizeMode.CanResize;                  // haalt de game uit fullscreen
                             WindowStyle = WindowStyle.SingleBorderWindow;
                             WindowState = WindowState.Normal;
                             Topmost = false;
