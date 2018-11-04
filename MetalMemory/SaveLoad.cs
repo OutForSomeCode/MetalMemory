@@ -85,22 +85,29 @@ namespace MetalMemory
         /// </summary>
         public static void LoadSomething()
         {
-            IFormatter formatter = new BinaryFormatter();
-            Stream stream = new FileStream(SaveFile, FileMode.Open, FileAccess.Read);
+            if (File.Exists(SaveFile))
+            {
+                IFormatter formatter = new BinaryFormatter();
+                Stream stream = new FileStream(SaveFile, FileMode.Open, FileAccess.Read);
 
-            // maakt een nieuwe class aan met de indeling van "SaveData" en vult deze met de data uit onze save file "memory.sav"
-            SaveData Load = (SaveData)formatter.Deserialize(stream);
-            stream.Close();
+                // maakt een nieuwe class aan met de indeling van "SaveData" en vult deze met de data uit onze save file "memory.sav"
+                SaveData Load = (SaveData)formatter.Deserialize(stream);
+                stream.Close();
 
-            // geeft aan waar de geladen data heen moet(haalt hij uit de load class, hierboven aangemaakt)
-            InitializeCards.GetTagDataList = Load.SavecardTagData;
-            InitializeGame.Player1 = Load.SavePlayer1;
-            InitializeGame.Player2 = Load.SavePlayer2;
-            GameLogic.ScoreOfPlayer1 = Load.SaveScoreOfPlayer1;
-            GameLogic.ScoreOfPlayer2 = Load.SaveScoreOfPlayer2;
-            InitializeGame.GridColumn = Load.SaveGridColumn;
-            InitializeGame.GridRows = Load.SaveGridRows;
-            GameLogic.TurnOfPlayer1 = Load.SaveTurnOfPlayer1;
+                // geeft aan waar de geladen data heen moet(haalt hij uit de load class, hierboven aangemaakt)
+                InitializeCards.GetTagDataList = Load.SavecardTagData;
+                InitializeGame.Player1 = Load.SavePlayer1;
+                InitializeGame.Player2 = Load.SavePlayer2;
+                GameLogic.ScoreOfPlayer1 = Load.SaveScoreOfPlayer1;
+                GameLogic.ScoreOfPlayer2 = Load.SaveScoreOfPlayer2;
+                InitializeGame.GridColumn = Load.SaveGridColumn;
+                InitializeGame.GridRows = Load.SaveGridRows;
+                GameLogic.TurnOfPlayer1 = Load.SaveTurnOfPlayer1;
+            }
+            else
+            {
+                return;
+            }
         }
 
         public static void LoadHighscores()
