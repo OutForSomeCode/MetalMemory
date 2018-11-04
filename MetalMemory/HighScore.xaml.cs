@@ -20,11 +20,16 @@ namespace MetalMemory
     /// </summary>
     public partial class HighScore : Page
     {
+        private static string Naam1 = InitializeGame.Player1;
+        private static string Naam2 = InitializeGame.Player2;
+        private static int Score1 = GameLogic.ScoreOfPlayer1;
+        private static int Score2 = GameLogic.ScoreOfPlayer2;
         public static Dictionary<string, int> highscores = new Dictionary<string, int>();
 
         public HighScore()
         {
             InitializeComponent();
+            UpdateHighscore();
         }
         
         public void UpdateHighscore()
@@ -47,18 +52,18 @@ namespace MetalMemory
 
         public static void HighscoreList()
         {
-            if (GameLogic.ScoreOfPlayer1 == GameLogic.ScoreOfPlayer2)
+            if (Score1 == Score2)
             {
-                highscores.Add(InitializeGame.Player1, GameLogic.ScoreOfPlayer1);
-                highscores.Add(InitializeGame.Player2, GameLogic.ScoreOfPlayer2);
+                highscores.Add(Naam1, Score1);
+                highscores.Add(Naam2, Score2);
             }
-            else if (GameLogic.ScoreOfPlayer1 > GameLogic.ScoreOfPlayer2)
+            else if (Score1 > Score2)
             {
-                highscores.Add(InitializeGame.Player1, GameLogic.ScoreOfPlayer1);
+                highscores.Add(Naam1, Score1);
             }
             else
             {
-                highscores.Add(InitializeGame.Player2, GameLogic.ScoreOfPlayer2);
+                highscores.Add(Naam2, Score2);
             }
         }
     }
