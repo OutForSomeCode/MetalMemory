@@ -30,15 +30,22 @@ namespace MetalMemory
         public HighScore()
         {
             InitializeComponent();
+            var listorder = highscores.OrderByDescending(x => x.Value).ToList();
+            //var listlist = from pair in highscores orderby pair.Value descending select pair;
             var strlist = highscores.Keys.ToList();
             var intlist = highscores.Values.ToList();
 
-            for (int i = 0; i < strlist.Count && i < 7; i++)
+            //Score_0.Text = Convert.ToString(listlist.First());
+
+            int listsize = listorder.Count();
+           for (int i = 0; i < listsize && i < 7; i++)
             {
                 TextBlock tb = (this.FindName(string.Format("Score_{0}", i)) as TextBlock);
-                tb.Text = strlist[i] + ": " + intlist[i];
+                tb.Text = Convert.ToString(listorder.First());
+                listorder.RemoveAt(0);
             }
         }
+
 
         public static void HighscoreList()
         {
