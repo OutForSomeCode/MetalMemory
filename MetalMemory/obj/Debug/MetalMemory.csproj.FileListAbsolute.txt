@@ -90,3 +90,4 @@ C:\Users\andry\Documents\GitHub\memorygame\MetalMemory\obj\Debug\MetalMemory.exe
 C:\Users\andry\Documents\GitHub\memorygame\MetalMemory\obj\Debug\MetalMemory.pdb
 C:\Users\rolan\Documents\GitHub\MetalMemory\MetalMemory\obj\Debug\HighScore.g.cs
 C:\Users\rolan\Documents\GitHub\MetalMemory\MetalMemory\obj\Debug\HighScore.baml
+C:\Users\rolan\Documents\GitHub\MetalMemory\MetalMemory\obj\Debug\MetalMemory.csprojAssemblyReference.cache

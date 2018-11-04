@@ -105,14 +105,21 @@ namespace MetalMemory
 
         public static void LoadHighscores()
         {
-            IFormatter formatter = new BinaryFormatter();
-            Stream stream = new FileStream(SaveHighscore, FileMode.Open, FileAccess.Read);
+            if (File.Exists(SaveHighscore))
+            {
+                IFormatter formatter = new BinaryFormatter();
+                Stream stream = new FileStream(SaveHighscore, FileMode.Open, FileAccess.Read);
 
-            // maakt een nieuwe class aan met de indeling van "SaveData" en vult deze met de data uit onze save file "memory.sav"
-            SaveHighscoreData Load = (SaveHighscoreData)formatter.Deserialize(stream);
-            stream.Close();
+                // maakt een nieuwe class aan met de indeling van "SaveData" en vult deze met de data uit onze save file "memory.sav"
+                SaveHighscoreData Load = (SaveHighscoreData)formatter.Deserialize(stream);
+                stream.Close();
 
-            HighScore.highscores = Load.SaveHighscoreDictionary;
+                HighScore.highscores = Load.SaveHighscoreDictionary;
+            }
+            else
+            {
+                return;
+            }    
         }
     }
 }
